@@ -16,44 +16,38 @@ body {
   text-align:center;
 }
 
-/* Header with logo and navigation */
+/* Header */
 header {
   background:#111;
   color:white;
-  padding:10px 20px;
+  padding:20px;
   border-bottom:3px solid #f5a623;
+}
+
+header img.logo {
+  height:80px;
+  display:block;
+  margin:0 auto 10px auto;
 }
 
 header h1 {
   margin:0;
-  font-size:1.2em;
+  font-size:1.5em;
 }
 
-header a {
+nav {
+  margin-top:10px;
+}
+
+nav a {
   color:#f5a623;
   text-decoration:none;
-  margin:0 10px;
+  margin:0 15px;
   font-weight:bold;
 }
 
-header a:hover {
+nav a:hover {
   text-decoration:underline;
-}
-
-header .header-container {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-header .logo-title {
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-header .logo-title img {
-  height:50px;
 }
 
 /* Video container responsive */
@@ -62,7 +56,7 @@ header .logo-title img {
   width: 90%;
   max-width: 900px;
   margin: 40px auto;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
 }
 
 .video-container iframe {
@@ -71,14 +65,6 @@ header .logo-title img {
   left:0;
   width:100%;
   height:100%;
-}
-
-/* Banner image */
-.poster-image {
-  max-width:900px;
-  width:90%;
-  margin:40px auto;
-  border-radius:8px;
 }
 
 p.service-times {
@@ -98,40 +84,30 @@ footer {
 </head>
 <body>
 
-<!-- Header -->
+<!-- Header with Logo on Top -->
 <header>
-  <div class="header-container">
-    <div class="logo-title">
-      <img src="Banner.jpg" alt="Charity Tabernacle Logo">
-      <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="live.html">Watch Live</a>
-      <a href="archive.html">Archives</a>
-    </nav>
-  </div>
+  <img class="logo" src="Logo.png" alt="Charity Tabernacle Logo">
+  <h1><a href="index.html" style="color:white; text-decoration:none;">Charity Tabernacle Agbor</a></h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="live.html">Watch Live</a>
+    <a href="archive.html">Archives</a>
+  </nav>
 </header>
 
-<!-- Live Player or Banner -->
-<div id="live-section">
-  <!-- Banner image (shows when no live service) -->
-  <img class="poster-image" src="Banner.jpg" alt="Charity Tabernacle Banner">
-
-  <!-- Uncomment this div when live service is active -->
-  <!--
-  <div class="video-container" id="live-service">
-    <iframe
-      src="https://www.youtube.com/embed/UCwLLSjfGQBN0ZAA1wIK0fCQ?autoplay=1&rel=0&modestbranding=1"
-      allowfullscreen
-      allow="autoplay; encrypted-media"
-    ></iframe>
-  </div>
-  -->
+<!-- Live Service Player -->
+<div class="video-container" id="live-service">
+  <iframe
+    src="https://www.youtube.com/embed/UCwLLSjfGQBN0ZAA1wIK0fCQ?autoplay=1&rel=0&modestbranding=1"
+    allowfullscreen
+    allow="autoplay; encrypted-media">
+  </iframe>
 </div>
 
+<!-- Service Times -->
 <p class="service-times">Sunday Service – 9:00 AM | Wednesday Service – 4:30 PM</p>
 
+<!-- Footer -->
 <footer>
   <p>© 2026 Charity Tabernacle Agbor</p>
 </footer>
@@ -139,8 +115,7 @@ footer {
 <!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.min.js"></script>
 <script>
-  // Uncomment when live service is active
-  // const player = new Plyr('#live-service iframe');
+  const player = new Plyr('#live-service iframe');
 </script>
 
 </body>
