@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPOSITORY-NAME
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "announcements"
+    label: "Announcements"
+    files:
+      - file: "data/announcements.json"
+        label: "Church Announcements"
+        name: "announcements"
+        fields:
+          - {label: "Announcement 1", name: "announcement1", widget: "string"}
+          - {label: "Announcement 2", name: "announcement2", widget: "string"}
+          - {label: "Announcement 3", name: "announcement3", widget: "string"}
