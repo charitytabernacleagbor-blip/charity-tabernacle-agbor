@@ -1,64 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Charity Tabernacle Agbor - Live Service</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Charity Tabernacle Agbor - Live Service</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<!-- Plyr CSS -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin:0;
-      background:#f5f5f5;
-      text-align:center;
-    }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f5f5f5;
+  text-align:center;
+}
 
-    /* Header with logo and navigation */
-    header {
-      background:#111;
-      color:white;
-      padding:10px 20px;
-      border-bottom:3px solid #f5a623;
-    }
+/* Header with logo and navigation */
+header {
+  background:#111;
+  color:white;
+  padding:10px 20px;
+  border-bottom:3px solid #f5a623;
+}
 
-    header h1 {
-      margin:0;
-      font-size:1.2em;
-    }
+header h1 {
+  margin:0;
+  font-size:1.2em;
+}
 
-    header a {
-      color:#f5a623;
-      text-decoration:none;
-      margin:0 10px;
-      font-weight:bold;
-    }
+header a {
+  color:#f5a623;
+  text-decoration:none;
+  margin:0 10px;
+  font-weight:bold;
+}
 
-    header a:hover {
-      text-decoration:underline;
-    }
+header a:hover {
+  text-decoration:underline;
+}
 
-    header .header-container {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
+header .header-container {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    header .logo-title {
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+header .logo-title {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-    header .logo-title img {
-      height:50px;
-    }
+header .logo-title img {
+  height:50px;
+}
 
-    nav a {
-      margin-left:15px;
-    }
+/* Video container responsive */
+.video-container {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
 
-    /* Video container responsive */
-    .
+.video-container iframe {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+/* Banner image */
+.poster-image {
+  max-width:900px;
+  width:90%;
+  margin:40px auto;
+  border-radius:8px;
+}
+
+p.service-times {
+  font-weight: bold;
+  margin-top:20px;
+  font-size:1.1em;
+}
+
+footer {
+  background:#111;
+  color:white;
+  padding:20px;
+  text-align:center;
+  margin-top:40px;
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="header-container">
+    <div class="logo-title">
+      <img src="Banner.jpg" alt="Charity Tabernacle Logo">
+      <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="live.html">Watch Live</a>
+      <a href="archive.html">Archives</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Live Player or Banner -->
+<div id="live-section">
+  <!-- Banner image (shows when no live service) -->
+  <img class="poster-image" src="Banner.jpg" alt="Charity Tabernacle Banner">
+
+  <!-- Uncomment this div when live service is active -->
+  <!--
+  <div class="video-container" id="live-service">
+    <iframe
+      src="https://www.youtube.com/embed/UCwLLSjfGQBN0ZAA1wIK0fCQ?autoplay=1&rel=0&modestbranding=1"
+      allowfullscreen
+      allow="autoplay; encrypted-media"
+    ></iframe>
+  </div>
+  -->
+</div>
+
+<p class="service-times">Sunday Service – 9:00 AM | Wednesday Service – 4:30 PM</p>
+
+<footer>
+  <p>© 2026 Charity Tabernacle Agbor</p>
+</footer>
+
+<!-- Plyr JS -->
+<script src="https://cdn.plyr.io/3.7.8/plyr.min.js"></script>
+<script>
+  // Uncomment when live service is active
+  // const player = new Plyr('#live-service iframe');
+</script>
+
+</body>
+</html>
