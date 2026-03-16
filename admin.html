@@ -70,7 +70,7 @@ async function loadData(){
   }
 }
 
-function saveData(){
+async function saveData(){
   const data = {
     announcements: document.getElementById("announcementsText").value,
     services: document.getElementById("servicesText").value,
@@ -78,8 +78,22 @@ function saveData(){
     dailyQuote: document.getElementById("dailyQuoteText").value
   };
 
-  localStorage.setItem("churchData", JSON.stringify(data));
-  alert("Changes saved locally! Next step will push to server.");
+  try {
+    const res = await fetch('/api/saveData', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: PASSWORD, data })
+    });
+
+    const result = await res.json();
+    if(res.ok){
+      alert("Changes saved live!");
+    } else {
+      alert("Error: " + result.message);
+    }
+  } catch(err){
+    alert("Error saving data: " + err);
+  }
 }
 </script>
 
