@@ -171,7 +171,8 @@ img{
   <h2>Last Live Service</h2>
   <div class="video">
     <video id="lastLive" playsinline controls data-poster="Banner.jpg">
-      <source src="" type="video/youtube">
+      <!-- Hardcoded last service video -->
+      <source src="https://www.youtube.com/watch?v=7GRlO-5LtaY" type="video/youtube">
     </video>
   </div>
 </section>
@@ -234,23 +235,6 @@ img{
   // Initialize Plyr
   const livePlayer = new Plyr('#livePlayer');
   const lastLivePlayer = new Plyr('#lastLive');
-
-  // Load JSON for last service video
-  fetch('/data/churchData.json')
-    .then(res => res.json())
-    .then(data => {
-      if(data.lastServiceVideoID){
-        const lastSource = document.querySelector('#lastLive source');
-        lastSource.src = "https://www.youtube.com/watch?v=" + data.lastServiceVideoID;
-        lastLivePlayer.reload();
-      } else {
-        // No last service yet → show banner
-        const lastVideo = document.getElementById('lastLive');
-        lastVideo.poster = 'Banner.jpg';
-        lastVideo.style.display = 'block';
-      }
-    })
-    .catch(err => console.log("Error loading JSON:", err));
 </script>
 
 </body>
