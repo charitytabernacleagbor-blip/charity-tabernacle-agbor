@@ -1,40 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Church Admin</title>
-<style>
-body {
-  font-family: Arial;
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-}
-textarea, input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-}
-button {
-  padding: 10px 20px;
-  background: #f5a623;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-h3 {margin-top: 30px;}
-.event-block {border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px;}
-.add-event {margin-bottom: 20px;}
-</style>
+  <title>Church Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #f5a623;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .event-block {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      position: relative;
+    }
+
+    .remove-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: red;
+      color: white;
+      border: none;
+      padding: 3px 6px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #111;
+      margin-bottom: 20px;
+    }
+
+    #output {
+      height: 300px;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
 
 <h2>Church Admin Panel</h2>
 
 <label>Announcements</label>
-<textarea id="announcements" rows="4" placeholder="Enter announcements..."></textarea>
+<textarea id="announcements" rows="4" placeholder="Enter announcements here..."></textarea>
 
 <label>Daily Quote</label>
-<textarea id="dailyQuote" rows="4" placeholder="Enter daily quote..."></textarea>
+<textarea id="dailyQuote" rows="4" placeholder="Enter daily quote here..."></textarea>
 
 <label>Service Times</label>
 <textarea id="services" rows="2" placeholder="Enter service times..."></textarea>
@@ -44,60 +83,77 @@ h3 {margin-top: 30px;}
 
 <h3>Upcoming Events</h3>
 <div id="eventsContainer"></div>
-<button class="add-event" onclick="addEvent()">+ Add Event</button>
+<button onclick="addEvent()">Add Event</button>
 
 <button onclick="generate()">Generate Update</button>
 
-<h3>Copy this into churchData.json</h3>
-<textarea id="output" style="height:300px"></textarea>
+<h3>Generated JSON (for reference)</h3>
+<textarea id="output" readonly></textarea>
 
 <script>
-let eventCount = 0;
+  // Load from localStorage if available
+  window.onload = () => {
+    const storedData = localStorage.getItem("churchData");
+    if(storedData){
+      const data = JSON.parse(storedData);
+      document.getElementById('announcements').value = data.announcements || '';
+      document.getElementById('dailyQuote').value = data.dailyQuote || '';
+      document.getElementById('services').value = data.services || '';
+      document.getElementById('bannerImage').value = data.bannerImage || '';
 
-function addEvent(){
-  eventCount++;
-  const container = document.getElementById("eventsContainer");
-  const div = document.createElement("div");
-  div.className = "event-block";
-  div.id = "event-" + eventCount;
-  div.innerHTML = `
-    <label>Event Title</label>
-    <input placeholder="Event Title" class="eventTitle">
-    <label>Event Date</label>
-    <input placeholder="Event Date" class="eventDate">
-    <label>Event Location</label>
-    <input placeholder="Event Location" class="eventLocation">
-    <button onclick="removeEvent(${eventCount})" style="background:red;margin-top:5px;">Remove Event</button>
-  `;
-  container.appendChild(div);
-}
-
-function removeEvent(id){
-  const div = document.getElementById("event-" + id);
-  div.remove();
-}
-
-function generate(){
-  const events = [];
-  document.querySelectorAll(".event-block").forEach(block => {
-    const title = block.querySelector(".eventTitle").value;
-    const date = block.querySelector(".eventDate").value;
-    const location = block.querySelector(".eventLocation").value;
-    if(title || date || location){
-      events.push({title, date, location});
+      // Populate events
+      if(data.upcomingEvents && data.upcomingEvents.length){
+        data.upcomingEvents.forEach(ev => createEventBlock(ev.title, ev.date, ev.location));
+      }
     }
-  });
-
-  const data = {
-    announcements: document.getElementById("announcements").value,
-    dailyQuote: document.getElementById("dailyQuote").value,
-    services: document.getElementById("services").value,
-    bannerImage: document.getElementById("bannerImage").value,
-    upcomingEvents: events
   };
 
-  document.getElementById("output").value = JSON.stringify(data, null, 2);
-}
+  function createEventBlock(title='', date='', location=''){
+    const container = document.getElementById('eventsContainer');
+    const div = document.createElement('div');
+    div.className = 'event-block';
+    div.innerHTML = `
+      <button class="remove-btn" onclick="this.parentElement.remove()">X</button>
+      <label>Event Title</label>
+      <input class="eventTitle" value="${title}" placeholder="Event title">
+      <label>Event Date</label>
+      <input class="eventDate" value="${date}" placeholder="Event date">
+      <label>Event Location</label>
+      <input class="eventLocation" value="${location}" placeholder="Event location">
+    `;
+    container.appendChild(div);
+  }
+
+  function addEvent(){
+    createEventBlock();
+  }
+
+  function generate(){
+    const events = [];
+    document.querySelectorAll(".event-block").forEach(block => {
+      const title = block.querySelector(".eventTitle").value;
+      const date = block.querySelector(".eventDate").value;
+      const location = block.querySelector(".eventLocation").value;
+      if(title || date || location){
+        events.push({title, date, location});
+      }
+    });
+
+    const data = {
+      announcements: document.getElementById("announcements").value,
+      dailyQuote: document.getElementById("dailyQuote").value,
+      services: document.getElementById("services").value,
+      bannerImage: document.getElementById("bannerImage").value,
+      upcomingEvents: events
+    };
+
+    // Save to localStorage
+    localStorage.setItem("churchData", JSON.stringify(data));
+
+    // Show JSON output
+    document.getElementById("output").value = JSON.stringify(data, null, 2);
+    alert("Changes saved! Your homepage will now fetch the latest data.");
+  }
 </script>
 
 </body>
