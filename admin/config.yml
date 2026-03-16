@@ -1,19 +1,17 @@
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/YOUR-REPOSITORY-NAME
+  repo: charitytabernacleagbor-blip/charity-tabernacle-agbor
   branch: main
 
-media_folder: "images"
-public_folder: "/images"
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
 collections:
   - name: "announcements"
     label: "Announcements"
-    files:
-      - file: "data/announcements.json"
-        label: "Church Announcements"
-        name: "announcements"
-        fields:
-          - {label: "Announcement 1", name: "announcement1", widget: "string"}
-          - {label: "Announcement 2", name: "announcement2", widget: "string"}
-          - {label: "Announcement 3", name: "announcement3", widget: "string"}
+    folder: "content/announcements"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Message", name: "body", widget: "text" }
