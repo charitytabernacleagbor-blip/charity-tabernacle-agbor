@@ -82,10 +82,38 @@ img{border-radius:8px}
 <section>
   <h2>Last Live Service</h2>
   <div class="video">
-    <video id="lastLive" playsinline controls data-poster="Banner.jpg">
-      <source src="" type="video/youtube">
-    </video>
+    <div id="lastLive"></div>
   </div>
+</section>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script>
+const livePlayer = new Plyr('#livePlayer'); // Watch Live remains same
+
+// Load Last Live Service dynamically
+const API_KEY = 'YOUR_API_KEY_HERE';
+const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
+
+fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
+.then(res => res.json())
+.then(data => {
+  if(data.items && data.items.length){
+    const latestID = data.items[0].snippet.resourceId.videoId;
+
+    // Create a div for Plyr YouTube player
+    const lastDiv = document.getElementById('lastLive');
+    lastDiv.innerHTML = `<div id="lastPlayer"></div>`;
+
+    const player = new Plyr('#lastPlayer', {
+      type: 'youtube',
+      autoplay: false,
+      videoId: latestID,
+      controls: ['play-large','play','progress','current-time','mute','volume','settings','fullscreen']
+    });
+  }
+})
+.catch(err => console.log("Error fetching last live video:", err));
+</script>
 </section>
 
 <!-- Upcoming Events -->
