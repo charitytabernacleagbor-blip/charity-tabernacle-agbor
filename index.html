@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Charity Tabernacle Agbor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch Live - Charity Tabernacle Agbor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<!-- Plyr CSS -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-    header { background:#111; color:white; padding:20px; text-align:center; border-bottom:3px solid #f5a623; }
-    header img { height:80px; margin-bottom:10px; }
-    header a { color:#f5a623; text-decoration:none; margin:0 10px; font-weight:bold; }
-    header a:hover { text-decoration:underline; }
-    section { padding:30px 20px; background:#f9f9f9; margin-bottom:20px; border-radius:8px; text-align:center; }
-    section h2 { text-align:center; color:#111; margin-bottom:20px; }
-    .video { max-width:1920px; width:100%; margin:20px auto; }
-    footer { background:#111; color:white; padding:20px; text-align:center; }
-    img { border-radius:8px; }
-    .ticker { background:#f5a623; color:white; padding:10px; font-weight:bold; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; max-width:1100px; margin:auto; }
-    .card { background:white; padding:15px; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
-    .card p { margin-top:8px; font-weight:bold; }
-    .events p { margin:8px 0; }
-    #dailyQuote { color:black; font-size:18px; font-style:normal; margin-top:10px; }
-  </style>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;text-align:center}
+header{background:#111;color:white;padding:20px;text-align:center;border-bottom:3px solid #f5a623}
+header img{height:80px;margin-bottom:10px}
+header a{color:#f5a623;text-decoration:none;margin:0 10px;font-weight:bold}
+header a:hover{text-decoration:underline}
+section{padding:30px 20px;background:#f9f9f9;margin-bottom:20px;border-radius:8px;text-align:center}
+section h2{text-align:center;color:#111;margin-bottom:20px}
+.video{max-width:1920px;width:100%;margin:20px auto}
+footer{background:#111;color:white;padding:20px;text-align:center}
+#serviceTimes{margin-top:15px;font-weight:bold}
+</style>
 </head>
 <body>
 
@@ -35,91 +29,31 @@
   <p>Raising Lives Through The Word of God</p>
   <p>Pastor Eugene Uzoma Ibeabuchi</p>
   <p>
-    <a href="index.html">Home</a> | 
-    <a href="live.html">Watch Live</a> | 
+    <a href="index.html">Home</a> |
+    <a href="live.html">Watch Live</a> |
     <a href="sermons.html">Archive</a>
   </p>
 </header>
 
-<!-- Announcements Ticker -->
-<section class="ticker">
-  <marquee behavior="scroll" direction="left" id="tickerText">
-    Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 6:00 PM | Friday Worship Service – 4:30 PM
-  </marquee>
-</section>
-
 <!-- Banner -->
 <section>
-  <img src="Banner.jpg" style="width:100%; max-height:400px; object-fit:cover;">
-</section>
-
-<!-- Announcements -->
-<section>
-  <h2>Announcements</h2>
-  <p id="announcements">Sunday, Wednesday, and Friday services are ongoing as scheduled. Special events will be posted here.</p>
-</section>
-
-<!-- Daily Quote -->
-<section>
-  <h2>Daily Quote</h2>
-  <p id="dailyQuote">"The Lord is my shepherd; I shall not want." – Psalm 23:1</p>
+  <img src="Banner.jpg" style="width:100%;max-height:400px;object-fit:cover;">
 </section>
 
 <!-- Service Times -->
 <section>
   <h2>Service Times</h2>
-  <p id="services">Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 6:00 PM | Friday Worship Service – 4:30 PM</p>
+  <p id="serviceTimes">Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 6:00 PM</p>
 </section>
 
-<!-- Watch Live -->
+<!-- Live Stream Player -->
 <section>
   <h2>Watch Live Service</h2>
-  <div class="video" id="watchLiveContainer"></div>
-</section>
-
-<!-- Last Live Service -->
-<section>
-  <h2>Last Live Service</h2>
-  <div class="video" id="lastLiveContainer"></div>
-</section>
-
-<!-- Upcoming Events -->
-<section>
-  <h2>Upcoming Events</h2>
-  <div class="grid events">
-    <div class="card">
-      <h3>Enugu Easter Convention</h3>
-      <p>Date: April 2–6, 2026</p>
-      <p>Rapture Time Christian Assembly Auditorium</p>
-    </div>
-    <div class="card">
-      <h3>Maricopa Valley Convention</h3>
-      <p>Date: August 13–16, 2026</p>
-      <p>Crown Plaza, Phoenix</p>
-    </div>
-    <div class="card">
-      <h3>Isiokpo Youth Convention</h3>
-      <p>Date: September 3–7, 2026</p>
-    </div>
+  <div class="video">
+    <video id="livePlayer" playsinline controls data-poster="Banner.jpg">
+      <source src="https://www.youtube.com/watch?v=UCwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
+    </video>
   </div>
-</section>
-
-<!-- Quick Links -->
-<section>
-  <h2>Quick Links</h2>
-  <p>
-    <a href="live.html">Watch Live</a> | 
-    <a href="sermons.html">Message Archive</a> | 
-    <a href="tel:+2348033595016">Contact Pastor</a>
-  </p>
-</section>
-
-<!-- Contact / Deacons -->
-<section>
-  <h2>Contact / Deacons</h2>
-  <p>Bro Samson Eigbochie | +2348037256852</p>
-  <p>Bro Ikechukwu Moses | +2347066217152</p>
-  <p>Address: 19b Abiamuwe, Agbor, Delta State Nigeria</p>
 </section>
 
 <!-- Footer -->
@@ -127,56 +61,10 @@
   <p>© 2026 Charity Tabernacle Agbor</p>
 </footer>
 
-<!-- Prayer Request Button -->
-<a href="https://wa.me/2348033595016?text=Hello%20Pastor,%20I%20have%20a%20prayer%20request"
-   style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
-   padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;
-   box-shadow:0 4px 8px rgba(0,0,0,0.2);z-index:1000;">
-   📩 Prayer Request
-</a>
-
 <!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
 <script>
-  // ---- WATCH LIVE PLAYER ----
-  const watchLiveContainer = document.getElementById('watchLiveContainer');
-  watchLiveContainer.innerHTML = '<div id="watchLivePlayer"></div>';
-
-  const watchLive = new Plyr('#watchLivePlayer', {
-    type: 'youtube',
-    videoId: '7GRlO-5LtaY',
-    autoplay: false,
-    controls: ['play-large','play','progress','current-time','mute','volume','settings','fullscreen']
-  });
-
-  // ---- LAST LIVE SERVICE ----
-  const lastLiveContainer = document.getElementById('lastLiveContainer');
-  const API_KEY = AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc;
-  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
-
-  fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
-    .then(res => res.json())
-    .then(data => {
-      if(data.items && data.items.length){
-        const latestID = data.items[0].snippet.resourceId.videoId;
-
-        lastLiveContainer.innerHTML = '<div id="lastLivePlayer"></div>';
-
-        new Plyr('#lastLivePlayer', {
-          type: 'youtube',
-          videoId: latestID,
-          autoplay: false,
-          controls: ['play-large','play','progress','current-time','mute','volume','settings','fullscreen']
-        });
-      } else {
-        lastLiveContainer.innerHTML = "<p>No recent video available.</p>";
-      }
-    })
-    .catch(err => {
-      console.log("Error fetching last live video:", err);
-      lastLiveContainer.innerHTML = "<p>Unable to load last service.</p>";
-    });
+const livePlayer = new Plyr('#livePlayer');
 </script>
 
 </body>
