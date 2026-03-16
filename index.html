@@ -74,17 +74,13 @@
 <!-- Watch Live -->
 <section>
   <h2>Watch Live Service</h2>
-  <div class="video">
-    <div id="livePlayer"></div>
-  </div>
+  <div class="video" id="watchLiveContainer"></div>
 </section>
 
 <!-- Last Live Service -->
 <section>
   <h2>Last Live Service</h2>
-  <div class="video">
-    <div id="lastLivePlayer"></div>
-  </div>
+  <div class="video" id="lastLiveContainer"></div>
 </section>
 
 <!-- Upcoming Events -->
@@ -143,36 +139,43 @@
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
 <script>
-  // Watch Live Player
-  const livePlayer = new Plyr('#livePlayer', {
+  // --- Watch Live Player ---
+  const livePlayerContainer = document.getElementById('watchLiveContainer');
+  livePlayerContainer.innerHTML = '<div id="watchLive"></div>';
+
+  const livePlayer = new Plyr('#watchLive', {
     type: 'youtube',
-    videoId: 'UCwLLSjfGQBN0ZAA1wIK0fCQ',
+    videoId: 'UCwLLSjfGQBN0ZAA1wIK0fCQ', // your live channel id
     autoplay: false,
     controls: ['play-large','play','progress','current-time','mute','volume','settings','fullscreen']
   });
 
-  // Last Live Service Player (auto-updating)
-  const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your API key
-  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
+  // --- Last Live Service ---
+  const lastLiveContainer = document.getElementById('lastLiveContainer');
+  const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your YouTube API key
+  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ'; // your playlist id
 
   fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
     .then(res => res.json())
     .then(data => {
       if(data.items && data.items.length){
         const latestID = data.items[0].snippet.resourceId.videoId;
-        const lastPlayer = new Plyr('#lastLivePlayer', {
+
+        lastLiveContainer.innerHTML = '<div id="lastLivePlayer"></div>';
+
+        const lastLivePlayer = new Plyr('#lastLivePlayer', {
           type: 'youtube',
           videoId: latestID,
           autoplay: false,
           controls: ['play-large','play','progress','current-time','mute','volume','settings','fullscreen']
         });
       } else {
-        document.getElementById('lastLivePlayer').innerHTML = "<p>No recent video available.</p>";
+        lastLiveContainer.innerHTML = "<p>No recent video available.</p>";
       }
     })
     .catch(err => {
       console.log("Error fetching last live video:", err);
-      document.getElementById('lastLivePlayer').innerHTML = "<p>Unable to load last service.</p>";
+      lastLiveContainer.innerHTML = "<p>Unable to load last service.</p>";
     });
 </script>
 
