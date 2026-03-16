@@ -158,23 +158,43 @@ img{
 <section>
   <h2>Service Times</h2>
   <p>Sunday Worship Service – 9:00 AM</p>
-  <p>Wednesday Worship Service – 6:00 PM</p>
+  <p>Wednesday Worship Service – :00 PM</p>
 </section>
 
 <!-- Watch Live -->
 <section>
   <h2>Watch Live Service</h2>
   <div class="video">
-    <div id="livePlayer" data-plyr-provider="youtube" data-plyr-embed-id="UCwLLSjfGQBN0ZAA1wIK0fCQ"></div>
+    <div class="plyr__video-embed" id="livePlayer">
+      <iframe
+        src="https://www.youtube.com/embed/UCwLLSjfGQBN0ZAA1wIK0fCQ?origin=https://charity-tabernacle-agbor.vercel.app"
+        allowfullscreen
+        allowtransparency
+        allow="autoplay"
+      ></iframe>
+    </div>
   </div>
 </section>
 
-<!-- Last Live Service -->
 <section>
   <h2>Last Live Service</h2>
   <div class="video">
-    <div id="lastLivePlayer" data-plyr-provider="youtube" data-plyr-embed-id="7GRlO-5LtaY"></div>
+    <div class="plyr__video-embed" id="lastLivePlayer">
+      <iframe
+        src="https://www.youtube.com/embed/7GRlO-5LtaY?origin=https://charity-tabernacle-agbor.vercel.app"
+        allowfullscreen
+        allowtransparency
+        allow="autoplay"
+      ></iframe>
+    </div>
   </div>
+</section>
+
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script>
+  const livePlayer = new Plyr('#livePlayer');
+  const lastLivePlayer = new Plyr('#lastLivePlayer');
+</script>
 </section>
 
 <!-- Upcoming Events -->
@@ -182,8 +202,7 @@ img{
   <h2>Upcoming Events</h2>
   <div class="grid events">
     <div class="card">
-      <h3>Enugu Easter Convention</h3>
-      <p>Date: April 2–6, 2026</p>
+  2026</p>
       <p>Rapture Time Christian Assembly Auditorium</p>
     </div>
     <div class="card">
