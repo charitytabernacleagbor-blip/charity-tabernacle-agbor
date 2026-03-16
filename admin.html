@@ -55,6 +55,7 @@ function login() {
   }
 }
 
+// Load data from JSON file
 async function loadData(){
   try{
     const response = await fetch(DATA_FILE);
@@ -70,6 +71,7 @@ async function loadData(){
   }
 }
 
+// Save data to serverless function
 async function saveData(){
   const data = {
     announcements: document.getElementById("announcementsText").value,
@@ -94,20 +96,6 @@ async function saveData(){
   } catch(err){
     alert("Error saving data: " + err);
   }
-}
-</script>
-
-</body>
-</html>function saveData(){
-  const data = {
-    announcements: document.getElementById("announcementsText").value,
-    services: document.getElementById("servicesText").value,
-    events: document.getElementById("eventsText").value
-  };
-  
-  // For now, we just save locally (next we’ll implement server write)
-  localStorage.setItem("churchData", JSON.stringify(data));
-  alert("Changes saved locally. Next step will make it update live site!");
 }
 </script>
 
