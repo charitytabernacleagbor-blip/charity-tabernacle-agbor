@@ -1,190 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Charity Tabernacle Agbor Admin Panel</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  margin: 0;
-  padding: 0;
-}
-
-header {
-  background: #111;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 3px solid #f5a623;
-}
-
-header h1 {
-  margin: 0;
-}
-
-section {
-  background: #fff;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 900px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-section h2 {
-  margin-top: 0;
-  color: #111;
-  text-align: center;
-}
-
-textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  resize: vertical;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-button {
-  background: #f5a623;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-button:hover {
-  background: #e5941f;
-}
-
-.event-card {
-  background: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-}
-
-.event-card input {
-  margin-bottom: 5px;
-}
-</style>
+  <title>Charity Tabernacle Admin Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #111; color: white; padding: 20px; text-align: center; border-bottom: 3px solid #f5a623; }
+    header h1 { margin: 0; font-size: 24px; }
+    section { padding: 20px; max-width: 900px; margin: 20px auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    section h2 { color: #111; margin-bottom: 10px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input[type="text"], textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; }
+    textarea { resize: vertical; min-height: 60px; }
+    button { margin-top: 15px; padding: 12px 20px; background: #f5a623; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    button:hover { background: #e5941e; }
+    .event-group { margin-bottom: 15px; border: 1px solid #ccc; padding: 10px; border-radius: 6px; }
+    .event-group input { margin-bottom: 5px; }
+  </style>
 </head>
 <body>
 
 <header>
-  <h1>Charity Tabernacle Agbor Admin Panel</h1>
+  <h1>Charity Tabernacle Admin Panel</h1>
   <p>Edit announcements, daily quotes, service times, and upcoming events</p>
 </header>
 
 <section>
   <h2>Announcements</h2>
-  <textarea id="announcementsInput" rows="4" placeholder="Enter announcements here..."></textarea>
+  <textarea id="announcements" placeholder="Enter announcements..."></textarea>
 </section>
 
 <section>
   <h2>Daily Quote</h2>
-  <textarea id="dailyQuoteInput" rows="4" placeholder="Enter daily quote here..."></textarea>
+  <textarea id="dailyQuote" placeholder="Enter daily quote, paragraphs allowed..."></textarea>
 </section>
 
 <section>
   <h2>Service Times</h2>
-  <textarea id="serviceTimesInput" rows="2" placeholder="Enter service times here..."></textarea>
+  <textarea id="serviceTimes" placeholder="Enter service times, paragraphs allowed..."></textarea>
 </section>
 
 <section>
   <h2>Upcoming Events</h2>
   <div id="eventsContainer"></div>
-  <button id="addEventBtn">Add Event</button>
+  <button type="button" onclick="addEvent()">Add Event</button>
 </section>
 
 <section>
-  <button id="saveBtn">Save Changes</button>
+  <button type="button" onclick="saveData()">Save & Update Site</button>
 </section>
 
 <script>
-// Load existing data from churchData.json
-fetch('/data/churchData.json')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('announcementsInput').value = data.announcements || "";
-    document.getElementById('dailyQuoteInput').value = data.dailyQuote || "";
-    document.getElementById('serviceTimesInput').value = data.services || "";
-    
-    // Load events
-    const eventsContainer = document.getElementById('eventsContainer');
-    const events = data.events || [];
-    events.forEach((ev, idx) => addEventCard(ev.title, ev.date, ev.location, idx));
-  })
-  .catch(err => console.log("Error loading JSON:", err));
+  // Function to add new event input group
+  function addEvent(title = '', date = '', location = '') {
+    const container = document.getElementById('eventsContainer');
+    const div = document.createElement('div');
+    div.className = 'event-group';
+    div.innerHTML = `
+      <label>Event Title</label>
+      <input type="text" class="eventTitle" value="${title}" placeholder="Enter event title">
+      <label>Date</label>
+      <input type="text" class="eventDate" value="${date}" placeholder="Enter date">
+      <label>Location</label>
+      <input type="text" class="eventLocation" value="${location}" placeholder="Enter location">
+      <button type="button" onclick="removeEvent(this)">Remove Event</button>
+    `;
+    container.appendChild(div);
+  }
 
-// Add a new event card
-function addEventCard(title="", date="", location="", index=null) {
-  const container = document.getElementById('eventsContainer');
-  const idx = index !== null ? index : container.children.length;
+  // Remove event group
+  function removeEvent(btn) {
+    btn.parentElement.remove();
+  }
 
-  const div = document.createElement('div');
-  div.className = "event-card";
-  div.dataset.index = idx;
-  div.innerHTML = `
-    <input type="text" class="eventTitle" placeholder="Event Title" value="${title}">
-    <input type="text" class="eventDate" placeholder="Event Date" value="${date}">
-    <input type="text" class="eventLocation" placeholder="Event Location" value="${location}">
-    <button class="removeEventBtn">Remove Event</button>
-  `;
-  container.appendChild(div);
+  // Save JSON data
+  function saveData() {
+    const data = {
+      announcements: document.getElementById('announcements').value,
+      dailyQuote: document.getElementById('dailyQuote').value,
+      services: document.getElementById('serviceTimes').value,
+      upcomingEvents: []
+    };
 
-  div.querySelector('.removeEventBtn').addEventListener('click', () => {
-    div.remove();
-  });
-}
-
-// Add new event button
-document.getElementById('addEventBtn').addEventListener('click', () => {
-  addEventCard();
-});
-
-// Save changes
-document.getElementById('saveBtn').addEventListener('click', () => {
-  const announcements = document.getElementById('announcementsInput').value;
-  const dailyQuote = document.getElementById('dailyQuoteInput').value;
-  const services = document.getElementById('serviceTimesInput').value;
-
-  const events = [];
-  document.querySelectorAll('.event-card').forEach(card => {
-    events.push({
-      title: card.querySelector('.eventTitle').value,
-      date: card.querySelector('.eventDate').value,
-      location: card.querySelector('.eventLocation').value
+    const eventGroups = document.querySelectorAll('.event-group');
+    eventGroups.forEach(group => {
+      data.upcomingEvents.push({
+        title: group.querySelector('.eventTitle').value,
+        date: group.querySelector('.eventDate').value,
+        location: group.querySelector('.eventLocation').value
+      });
     });
-  });
 
-  const updatedData = {
-    announcements,
-    dailyQuote,
-    services,
-    events
-  };
+    // Convert to JSON string
+    const jsonStr = JSON.stringify(data, null, 2);
 
-  // Normally here you would POST updatedData to your server
-  // For example: fetch('/save', {method:'POST', body: JSON.stringify(updatedData)})
-  console.log("Data to save:", updatedData);
-  alert("Changes saved! (Simulated - implement server save to persist)");
-});
+    // Save JSON to server or local storage
+    // For now, we'll allow download
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'churchData.json';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    alert('Data saved! Upload churchData.json to your server where index.html can access it.');
+  }
+
+  // Load existing data if churchData.json exists
+  async function loadData() {
+    try {
+      const res = await fetch('churchData.json');
+      const data = await res.json();
+      document.getElementById('announcements').value = data.announcements || '';
+      document.getElementById('dailyQuote').value = data.dailyQuote || '';
+      document.getElementById('serviceTimes').value = data.services || '';
+
+      if(data.upcomingEvents && data.upcomingEvents.length) {
+        data.upcomingEvents.forEach(ev => addEvent(ev.title, ev.date, ev.location));
+      } else {
+        addEvent(); // at least one empty event
+      }
+    } catch (e) {
+      addEvent(); // if no JSON exists, start with one empty event
+    }
+  }
+
+  loadData();
 </script>
 
 </body>
