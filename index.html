@@ -23,7 +23,7 @@
     .card { background:white; padding:15px; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
     .card p { margin-top:8px; font-weight:bold; }
     .events p { margin:8px 0; }
-    #dailyQuote { color:black; font-size:18px; margin-top:10px; font-style:normal; }
+    #dailyQuote { color:black; font-size:18px; font-style:normal; margin-top:10px; }
   </style>
 </head>
 <body>
@@ -139,21 +139,21 @@
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
 <script>
-  // --- Watch Live Player ---
-  const livePlayerContainer = document.getElementById('watchLiveContainer');
-  livePlayerContainer.innerHTML = '<div id="watchLive"></div>';
+  // ---- WATCH LIVE PLAYER ----
+  const watchLiveContainer = document.getElementById('watchLiveContainer');
+  watchLiveContainer.innerHTML = '<div id="watchLivePlayer"></div>';
 
-  const livePlayer = new Plyr('#watchLive', {
+  const watchLive = new Plyr('#watchLivePlayer', {
     type: 'youtube',
-    videoId: 'UCwLLSjfGQBN0ZAA1wIK0fCQ', // your live channel id
+    videoId: '7GRlO-5LtaY',
     autoplay: false,
     controls: ['play-large','play','progress','current-time','mute','volume','settings','fullscreen']
   });
 
-  // --- Last Live Service ---
+  // ---- LAST LIVE SERVICE ----
   const lastLiveContainer = document.getElementById('lastLiveContainer');
-  const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your YouTube API key
-  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ'; // your playlist id
+  const API_KEY = AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc;
+  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
 
   fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
     .then(res => res.json())
@@ -163,7 +163,7 @@
 
         lastLiveContainer.innerHTML = '<div id="lastLivePlayer"></div>';
 
-        const lastLivePlayer = new Plyr('#lastLivePlayer', {
+        new Plyr('#lastLivePlayer', {
           type: 'youtube',
           videoId: latestID,
           autoplay: false,
