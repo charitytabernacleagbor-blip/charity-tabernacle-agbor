@@ -4,7 +4,6 @@
 <title>Charity Tabernacle Agbor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Plyr CSS -->
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
 <style>
@@ -32,10 +31,6 @@ header a{
   text-decoration:none;
   margin:0 10px;
   font-weight:bold;
-}
-
-header a:hover{
-  text-decoration:underline;
 }
 
 section{
@@ -96,28 +91,29 @@ img{
   font-weight:bold;
 }
 
-.events p{
-  margin:8px 0;
-}
-
 #dailyQuote {
   color: black;
   font-size: 18px;
   margin-top: 10px;
-  font-style: normal;
 }
 </style>
 </head>
 <body>
 
-<!-- Header with Logo -->
 <header>
   <a href="index.html">
     <img src="Logo.png" alt="Charity Tabernacle Logo">
   </a>
-  <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
+
+  <h1>
+    <a href="index.html" style="color:white;text-decoration:none;">
+      Charity Tabernacle Agbor
+    </a>
+  </h1>
+
   <p>Raising Lives Through The Word of God</p>
   <p>Pastor Eugene Uzoma Ibeabuchi</p>
+
   <p>
     <a href="index.html">Home</a> |
     <a href="live.html">Watch Live</a> |
@@ -125,40 +121,43 @@ img{
   </p>
 </header>
 
-<!-- Announcements Ticker -->
 <section class="ticker">
   <marquee behavior="scroll" direction="left" id="tickerText">
-    Sunday Worship Service – 9:00 AM &nbsp;&nbsp;|&nbsp;&nbsp; Wednesday Worship Service – 4:30 PM
+    Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 4:30 PM
   </marquee>
 </section>
 
-<!-- Banner Image -->
 <section>
-  <img src="Banner.jpg" style="width:100%;max-height:400px;object-fit:cover;">
+  <img id="bannerImage" src="Banner.jpg" style="width:100%;max-height:1920px;object-fit:cover;">
 </section>
 
-<!-- Announcements -->
 <section>
   <h2>Announcements</h2>
-  <p id="announcements">Sunday and Wednesday services are ongoing. Special events will be posted here.</p>
+  <p id="announcements">
+    Sunday and Wednesday services are ongoing. Special events will be posted here.
+  </p>
 </section>
 
-<!-- Daily Quote -->
 <section>
   <h2>Daily Quote</h2>
-  <p id="dailyQuote">"Trust in the Lord with all your heart." – Proverbs 3:5</p>
+  <p id="dailyQuote">
+    "Trust in the Lord with all your heart." – Proverbs 3:5
+  </p>
 </section>
 
-<!-- Service Times -->
 <section>
   <h2>Service Times</h2>
-  <p>Sunday Worship Service – 9:00 AM</p>
-  <p>Wednesday Worship Service – 6:00 PM</p>
+  <p id="services">
+    Sunday Worship Service – 9:00 AM
+  </p>
+  <p>
+    Wednesday Worship Service – 4:30 PM
+  </p>
 </section>
 
-<!-- Watch Live -->
 <section>
   <h2>Watch Live Service</h2>
+
   <div class="video">
     <video id="livePlayer" playsinline controls data-poster="Banner.jpg">
       <source src="https://www.youtube.com/watch?v=UCwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
@@ -166,38 +165,42 @@ img{
   </div>
 </section>
 
-<!-- Last Live Service -->
 <section>
   <h2>Last Live Service</h2>
+
   <div class="video">
     <video id="lastServicePlayer" playsinline controls data-poster="Banner.jpg"></video>
   </div>
 </section>
 
-<!-- Upcoming Events -->
 <section>
   <h2>Upcoming Events</h2>
-  <div class="grid events">
+
+  <div class="grid events" id="eventsContainer">
+
     <div class="card">
       <h3>Enugu Easter Convention</h3>
       <p>Date: April 2–6, 2026</p>
       <p>Rapture Time Christian Assembly Auditorium</p>
     </div>
+
     <div class="card">
       <h3>Maricopa Valley Convention</h3>
       <p>Date: August 13–16, 2026</p>
       <p>Crown Plaza, Phoenix</p>
     </div>
+
     <div class="card">
       <h3>Isiokpo Youth Convention</h3>
       <p>Date: September 3–7, 2026</p>
     </div>
+
   </div>
 </section>
 
-<!-- Quick Links -->
 <section>
   <h2>Quick Links</h2>
+
   <p>
     <a href="live.html">Watch Live</a> |
     <a href="sermons.html">Message Archive</a> |
@@ -205,57 +208,87 @@ img{
   </p>
 </section>
 
-<!-- Contact / Deacons -->
 <section>
   <h2>Contact / Deacons</h2>
+
   <p>Bro Samson Eigbochie | +2348037256852</p>
   <p>Bro Ikechukwu Moses | +2347066217152</p>
   <p>Address: 19b Abiamuwe, Agbor, Delta State Nigeria</p>
 </section>
 
-<!-- Footer -->
 <footer>
   <p>© 2026 Charity Tabernacle Agbor</p>
 </footer>
 
-<!-- Prayer Request Button -->
 <a href="https://wa.me/2348033595016?text=Hello%20Pastor,%20I%20have%20a%20prayer%20request"
-   style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
-   padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;
-   box-shadow:0 4px 8px rgba(0,0,0,0.2);z-index:1000;">
-   📩 Prayer Request
+style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
+padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;
+box-shadow:0 4px 8px rgba(0,0,0,0.2);z-index:1000;">
+📩 Prayer Request
 </a>
 
-<!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
 <script>
-  // Live Service Player
-  const livePlayer = new Plyr('#livePlayer');
+const livePlayer = new Plyr('#livePlayer');
+const lastServicePlayer = new Plyr('#lastServicePlayer');
 
-  // Last Live Service Player
-  const lastServicePlayer = new Plyr('#lastServicePlayer');
+const API_KEY = 'AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc';
+const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
 
-  // YouTube API settings
-  const API_KEY = 'AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc';
-  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ'; // Your uploads playlist ID
+fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
+.then(response => response.json())
+.then(data => {
 
-  // Fetch latest video from playlist
-  fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-      const latestVideoId = data.items[0].snippet.resourceId.videoId;
+const latestVideoId = data.items[0].snippet.resourceId.videoId;
 
-      lastServicePlayer.source = {
-        type: 'video',
-        sources: [
-          {
-            src: latestVideoId,
-            provider: 'youtube',
-          }
-        ]
-      };
-    })
-    .catch(err => console.error('Error fetching latest video:', err));
+lastServicePlayer.source = {
+type:'video',
+sources:[
+{
+src:latestVideoId,
+provider:'youtube'
+}
+]
+};
+
+});
+</script>
+
+<script>
+const savedData = JSON.parse(localStorage.getItem("churchData") || "{}");
+
+if(savedData.announcements){
+document.getElementById("announcements").innerText = savedData.announcements;
+document.getElementById("tickerText").innerText = savedData.announcements;
+}
+
+if(savedData.dailyQuote){
+document.getElementById("dailyQuote").innerText = savedData.dailyQuote;
+}
+
+if(savedData.services){
+document.getElementById("services").innerText = savedData.services;
+}
+
+if(savedData.bannerImage){
+document.getElementById("bannerImage").src = savedData.bannerImage;
+}
+
+if(savedData.events){
+const container = document.getElementById("eventsContainer");
+container.innerHTML="";
+
+savedData.events.forEach(ev=>{
+container.innerHTML+=`
+<div class="card">
+<h3>${ev.title}</h3>
+<p>${ev.date}</p>
+<p>${ev.location}</p>
+</div>
+`;
+});
+}
 </script>
 
 </body>
