@@ -1,108 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Charity Tabernacle Admin</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Church Admin</title>
+
 <style>
-body { font-family: Arial, sans-serif; margin:20px; background:#f9f9f9; }
-h1 { text-align:center; color:#111; }
-label { display:block; margin-top:15px; font-weight:bold; }
-input, textarea { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
-button { margin-top:20px; padding:10px 20px; background:#f5a623; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer; }
-button:hover { background:#e6951a; }
-.event-block { border:1px solid #ccc; padding:10px; margin-top:10px; border-radius:5px; background:white; }
-.event-block h4 { margin:5px 0; }
+
+body{
+font-family:Arial;
+max-width:700px;
+margin:auto;
+padding:20px;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+}
+
+button{
+padding:10px 20px;
+background:#f5a623;
+color:white;
+border:none;
+}
+
 </style>
+
 </head>
+
 <body>
 
-<h1>Charity Tabernacle Admin Panel</h1>
+<h2>Church Admin Panel</h2>
 
-<form id="adminForm">
+<label>Announcements</label>
+<textarea id="announcements"></textarea>
 
-  <label for="announcements">Announcements (ticker & section):</label>
-  <textarea id="announcements" rows="3"></textarea>
+<label>Daily Quote</label>
+<input id="dailyQuote">
 
-  <label for="dailyQuote">Daily Quote:</label>
-  <input type="text" id="dailyQuote">
+<label>Service Times</label>
+<input id="services">
 
-  <label for="services">Service Times:</label>
-  <input type="text" id="services">
+<label>Banner Image</label>
+<input id="bannerImage">
 
-  <label for="bannerImage">Banner Image URL:</label>
-  <input type="text" id="bannerImage" placeholder="e.g. Banner.jpg">
+<button onclick="generate()">Generate Update</button>
 
-  <h2>Upcoming Events</h2>
-  <div id="eventsContainer"></div>
-  <button type="button" id="addEventBtn">+ Add Event</button>
+<h3>Copy this into churchData.json</h3>
 
-  <button type="submit">Save Updates</button>
-</form>
+<textarea id="output" style="height:300px"></textarea>
 
 <script>
-const form = document.getElementById('adminForm');
-const eventsContainer = document.getElementById('eventsContainer');
-const addEventBtn = document.getElementById('addEventBtn');
 
-// Load existing data
-let savedData = JSON.parse(localStorage.getItem('churchData') || '{}');
-document.getElementById('announcements').value = savedData.announcements || 'Sunday and Wednesday services are ongoing.';
-document.getElementById('dailyQuote').value = savedData.dailyQuote || 'Trust in the Lord with all your heart. – Proverbs 3:5';
-document.getElementById('services').value = savedData.services || 'Sunday: 9:00 AM, Wednesday: 6:00 PM';
-document.getElementById('bannerImage').value = savedData.bannerImage || 'Banner.jpg';
+function generate(){
 
-// Render events
-savedData.upcomingEvents = savedData.upcomingEvents || [];
-function renderEvents(){
-  eventsContainer.innerHTML = '';
-  savedData.upcomingEvents.forEach((ev, i) => {
-    const div = document.createElement('div');
-    div.className = 'event-block';
-    div.innerHTML = `
-      <h4>Event ${i+1}</h4>
-      <label>Title:</label><input type="text" class="eventTitle" value="${ev.title}">
-      <label>Date:</label><input type="text" class="eventDate" value="${ev.date}">
-      <label>Location:</label><input type="text" class="eventLocation" value="${ev.location}">
-      <button type="button" class="removeEventBtn">Remove</button>
-    `;
-    eventsContainer.appendChild(div);
+const data={
 
-    // Remove button
-    div.querySelector('.removeEventBtn').addEventListener('click', ()=>{
-      savedData.upcomingEvents.splice(i,1);
-      renderEvents();
-    });
-  });
+announcements:document.getElementById("announcements").value,
+
+dailyQuote:document.getElementById("dailyQuote").value,
+
+services:document.getElementById("services").value,
+
+bannerImage:document.getElementById("bannerImage").value,
+
+events:[]
+
+};
+
+document.getElementById("output").value=
+JSON.stringify(data,null,2);
+
 }
-renderEvents();
 
-// Add new event
-addEventBtn.addEventListener('click', ()=>{
-  savedData.upcomingEvents.push({title:'', date:'', location:''});
-  renderEvents();
-});
-
-// Save Updates
-form.addEventListener('submit', e=>{
-  e.preventDefault();
-  savedData.announcements = document.getElementById('announcements').value;
-  savedData.dailyQuote = document.getElementById('dailyQuote').value;
-  savedData.services = document.getElementById('services').value;
-  savedData.bannerImage = document.getElementById('bannerImage').value;
-
-  // Save events values
-  const eventBlocks = document.querySelectorAll('.event-block');
-  savedData.upcomingEvents = Array.from(eventBlocks).map(div=>{
-    return {
-      title: div.querySelector('.eventTitle').value,
-      date: div.querySelector('.eventDate').value,
-      location: div.querySelector('.eventLocation').value
-    }
-  });
-
-  localStorage.setItem('churchData', JSON.stringify(savedData));
-  alert('Updates saved! Refresh homepage to see changes.');
-});
 </script>
 
 </body>
