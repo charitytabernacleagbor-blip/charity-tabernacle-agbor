@@ -1,0 +1,23 @@
+{
+  "announcements": "Sunday and Wednesday services are ongoing. Special events will be posted here.",
+  "dailyQuote": "Trust in the Lord with all your heart. – Proverbs 3:5",
+  "services": "Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 4:30 PM",
+  "bannerImage": "Banner.jpg",
+  "events": [
+    {
+      "title": "Enugu Easter Convention",
+      "date": "April 2–6, 2026",
+      "location": "Rapture Time Christian Assembly Auditorium"
+    },
+    {
+      "title": "Maricopa Valley Convention",
+      "date": "August 13–16, 2026",
+      "location": "Crown Plaza, Phoenix"
+    },
+    {
+      "title": "Isiokpo Youth Convention",
+      "date": "September 3–7, 2026",
+      "location": ""
+    }
+  ]
+}
