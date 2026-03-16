@@ -1,30 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Watch Live - Charity Tabernacle Agbor</title>
+<title>Charity Tabernacle Agbor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Plyr CSS -->
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;text-align:center}
-header{background:#111;color:white;padding:20px;text-align:center;border-bottom:3px solid #f5a623}
-header img{height:80px;margin-bottom:10px}
-header a{color:#f5a623;text-decoration:none;margin:0 10px;font-weight:bold}
-header a:hover{text-decoration:underline}
-section{padding:30px 20px;background:#f9f9f9;margin-bottom:20px;border-radius:8px;text-align:center}
-section h2{text-align:center;color:#111;margin-bottom:20px}
-.video{max-width:1920px;width:100%;margin:20px auto}
-footer{background:#111;color:white;padding:20px;text-align:center}
-#serviceTimes{margin-top:15px;font-weight:bold}
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f5f5f5;
+}
+
+header{
+  background:#111;
+  color:white;
+  padding:20px;
+  text-align:center;
+  border-bottom:3px solid #f5a623;
+}
+
+header img{
+  height:80px;
+  margin-bottom:10px;
+}
+
+header a{
+  color:#f5a623;
+  text-decoration:none;
+  margin:0 10px;
+  font-weight:bold;
+}
+
+header a:hover{
+  text-decoration:underline;
+}
+
+section{
+  padding:30px 20px;
+  background:#f9f9f9;
+  margin-bottom:20px;
+  border-radius:8px;
+  text-align:center;
+}
+
+section h2{
+  text-align:center;
+  color:#111;
+  margin-bottom:20px;
+}
+
+.video {
+  max-width: 1920px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.video video {
+  width: 100%;
+  height: auto; /* maintains 16:9 aspect ratio */
+}
+
+footer{
+  background:#111;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+img{
+  border-radius:8px;
+}
+
+.ticker{
+  background:#f5a623;
+  color:white;
+  padding:10px;
+  font-weight:bold;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.card{
+  background:white;
+  padding:15px;
+  border-radius:8px;
+  box-shadow:0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card p{
+  margin-top:8px;
+  font-weight:bold;
+}
+
+.events p{
+  margin:8px 0;
+}
+
+#dailyQuote {
+  color: black;
+  font-size: 18px;
+  margin-top: 10px;
+  font-style: normal;
+}
 </style>
 </head>
 <body>
 
 <!-- Header with Logo -->
 <header>
-  <a href="index.html"><img src="Logo.png" alt="Charity Tabernacle Logo"></a>
+  <a href="index.html">
+    <img src="Logo.png" alt="Charity Tabernacle Logo">
+  </a>
   <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
   <p>Raising Lives Through The Word of God</p>
   <p>Pastor Eugene Uzoma Ibeabuchi</p>
@@ -35,18 +130,37 @@ footer{background:#111;color:white;padding:20px;text-align:center}
   </p>
 </header>
 
-<!-- Banner -->
+<!-- Announcements Ticker -->
+<section class="ticker">
+  <marquee behavior="scroll" direction="left" id="tickerText">
+    Loading announcements...
+  </marquee>
+</section>
+
+<!-- Banner Image -->
 <section>
   <img src="Banner.jpg" style="width:100%;max-height:400px;object-fit:cover;">
+</section>
+
+<!-- Announcements -->
+<section>
+  <h2>Announcements</h2>
+  <p id="announcements">Loading announcements...</p>
+</section>
+
+<!-- Daily Quote -->
+<section>
+  <h2>Daily Quote</h2>
+  <p id="dailyQuote">Loading daily quote...</p>
 </section>
 
 <!-- Service Times -->
 <section>
   <h2>Service Times</h2>
-  <p id="serviceTimes">Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 6:00 PM</p>
+  <p id="services">Loading service times...</p>
 </section>
 
-<!-- Live Stream Player -->
+<!-- Watch Live -->
 <section>
   <h2>Watch Live Service</h2>
   <div class="video">
@@ -56,15 +170,101 @@ footer{background:#111;color:white;padding:20px;text-align:center}
   </div>
 </section>
 
+<!-- Last Live Service -->
+<section>
+  <h2>Last Live Service</h2>
+  <div class="video">
+    <video id="lastLive" playsinline controls data-poster="Banner.jpg">
+      <source src="" type="video/youtube">
+    </video>
+  </div>
+</section>
+
+<!-- Upcoming Events -->
+<section>
+  <h2>Upcoming Events</h2>
+  <div class="grid events">
+    <div class="card">
+      <h3>Enugu Easter Convention</h3>
+      <p>Date: April 2–6, 2026</p>
+      <p>Rapture Time Christian Assembly Auditorium</p>
+    </div>
+    <div class="card">
+      <h3>Maricopa Valley Convention</h3>
+      <p>Date: August 13–16, 2026</p>
+      <p>Crown Plaza, Phoenix</p>
+    </div>
+    <div class="card">
+      <h3>Isiokpo Youth Convention</h3>
+      <p>Date: September 3–7, 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Links -->
+<section>
+  <h2>Quick Links</h2>
+  <p>
+    <a href="live.html">Watch Live</a> |
+    <a href="sermons.html">Message Archive</a> |
+    <a href="tel:+2348033595016">Contact Pastor</a>
+  </p>
+</section>
+
+<!-- Contact / Deacons -->
+<section>
+  <h2>Contact / Deacons</h2>
+  <p>Bro Samson Eigbochie | +2348037256852</p>
+  <p>Bro Ikechukwu Moses | +2347066217152</p>
+  <p>Address: 19b Abiamuwe, Agbor, Delta State Nigeria</p>
+</section>
+
 <!-- Footer -->
 <footer>
   <p>© 2026 Charity Tabernacle Agbor</p>
 </footer>
 
+<!-- Prayer Request Button -->
+<a href="https://wa.me/2348033595016?text=Hello%20Pastor,%20I%20have%20a%20prayer%20request"
+   style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
+   padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;
+   box-shadow:0 4px 8px rgba(0,0,0,0.2);z-index:1000;">
+   📩 Prayer Request
+</a>
+
 <!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script>
-const livePlayer = new Plyr('#livePlayer');
+  const livePlayer = new Plyr('#livePlayer');
+  const lastLivePlayer = new Plyr('#lastLive');
+
+  // Fetch admin JSON for dynamic content
+  fetch('/data/churchData.json')
+    .then(res => res.json())
+    .then(data => {
+      // Announcements
+      document.getElementById('announcements').innerText = data.announcements || "No announcements yet.";
+      document.getElementById('tickerText').innerText = data.announcements || "Sunday Worship Service – 9:00 AM | Wednesday – 6:00 PM";
+      
+      // Service times
+      document.getElementById('services').innerText = data.services || "Sunday: 9:00 AM, Wednesday: 6:00 PM";
+
+      // Daily quote
+      document.getElementById('dailyQuote').innerText = data.dailyQuote || "The Lord is my shepherd; I shall not want. – Psalm 23:1";
+
+      // Last live service
+      if(data.lastServiceVideoID){
+        const lastSource = document.querySelector('#lastLive source');
+        lastSource.src = "https://www.youtube.com/watch?v=" + data.lastServiceVideoID;
+        lastLivePlayer.reload();
+      } else {
+        // No last service yet → show banner
+        const lastVideo = document.getElementById('lastLive');
+        lastVideo.poster = 'Banner.jpg';
+        lastVideo.style.display = 'block';
+      }
+    })
+    .catch(err => console.log("Error loading JSON:", err));
 </script>
 
 </body>
