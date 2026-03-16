@@ -50,7 +50,7 @@ section h2{
 }
 
 .video{
-  max-width:1920px;
+  max-width:800px;
   margin:20px auto;
 }
 
@@ -110,35 +110,27 @@ img{
 }
 
 #dailyQuote {
-  color: black;   /* black text */
+  color: black;   
   font-size: 18px;
   margin-top: 10px;
-  font-style: normal;  /* remove italics */
+  font-style: normal;
 }
-
 </style>
+
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 </head>
 <body>
 
 <!-- Header with Logo -->
 <header>
-  <!-- Logo linked to homepage -->
   <a href="index.html">
     <img src="Logo.png" alt="Charity Tabernacle Logo">
   </a>
 
-  <!-- Header text linked to homepage -->
-  <h1>
-    <a href="index.html" style="color:white; text-decoration:none;">
-      Charity Tabernacle Agbor
-    </a>
-  </h1>
-
+  <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
   <p>Raising Lives Through The Word of God</p>
   <p>Pastor Eugene Uzoma Ibeabuchi</p>
 
-  <!-- Navigation links -->
   <p>
     <a href="index.html">Home</a> |
     <a href="live.html">Watch Live</a> |
@@ -155,7 +147,7 @@ img{
 
 <!-- Banner Image -->
 <section>
-  <img src="Banner.jpg" style="width:100%;max-height:1920px;object-fit:cover;">
+  <img src="Banner.jpg" style="width:100%;max-height:400px;object-fit:cover;">
 </section>
 
 <!-- Announcements -->
@@ -180,17 +172,19 @@ img{
 <section>
   <h2>Watch Live Service</h2>
   <div class="video">
-    <video id="player" playsinline controls data-poster="Banner.jpg">
-  <source src="https://www.youtube.com/watch?v=UCwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
+    <video id="livePlayer" playsinline controls data-poster="Banner.jpg">
+      <source src="https://www.youtube.com/watch?v=UCwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
     </video>
   </div>
 </section>
 
-<!-- Latest Message -->
+<!-- Last Live Service -->
 <section>
-  <h2>Latest Message</h2>
+  <h2>Last Live Service</h2>
   <div class="video">
-    <iframe width="100%" height="450" src="https://www.youtube.com/embed?listType=playlist&list=UUwLLSjfGQBN0ZAA1wIK0fCQ" frameborder="0" allowfullscreen></iframe>
+    <video id="lastLive" playsinline controls data-poster="Banner.jpg">
+      <source src="https://www.youtube.com/embed/?listType=playlist&list=UUwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
+    </video>
   </div>
 </section>
 
@@ -225,7 +219,7 @@ img{
   </p>
 </section>
 
-<!-- Contact -->
+<!-- Contact / Deacons -->
 <section>
   <h2>Contact / Deacons</h2>
   <p>Bro Samson Eigbochie | +2348037256852</p>
@@ -246,20 +240,22 @@ img{
    📩 Prayer Request
 </a>
 
+<!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script>
-const player = new Plyr('#player');
+  const livePlayer = new Plyr('#livePlayer');
+  const lastLivePlayer = new Plyr('#lastLive');
 
-// Fetch data from admin JSON
-fetch('/data/churchData.json')
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById('announcements').innerText = data.announcements || "No announcements yet.";
-    document.getElementById('services').innerText = data.services || "Sunday: 9:00 AM, Wednesday: 6:00 PM";
-    document.getElementById('dailyQuote').innerText = data.dailyQuote || "The Lord is my shepherd; I shall not want. – Psalm 23:1";
-    document.getElementById('tickerText').innerText = data.announcements || "Sunday Worship Service – 9:00 AM | Wednesday – 6:00 PM";
-  })
-  .catch(err => console.log("Error loading JSON:", err));
+  // Fetch admin JSON for dynamic content
+  fetch('/data/churchData.json')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('announcements').innerText = data.announcements || "No announcements yet.";
+      document.getElementById('services').innerText = data.services || "Sunday: 9:00 AM, Wednesday: 6:00 PM";
+      document.getElementById('dailyQuote').innerText = data.dailyQuote || "The Lord is my shepherd; I shall not want. – Psalm 23:1";
+      document.getElementById('tickerText').innerText = data.announcements || "Sunday Worship Service – 9:00 AM | Wednesday – 6:00 PM";
+    })
+    .catch(err => console.log("Error loading JSON:", err));
 </script>
 
 </body>
