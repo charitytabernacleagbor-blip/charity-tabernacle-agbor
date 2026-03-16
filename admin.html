@@ -1,132 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Charity Tabernacle Admin Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
-    header { background: #111; color: white; padding: 20px; text-align: center; border-bottom: 3px solid #f5a623; }
-    header h1 { margin: 0; font-size: 24px; }
-    section { padding: 20px; max-width: 900px; margin: 20px auto; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    section h2 { color: #111; margin-bottom: 10px; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    input[type="text"], textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px; }
-    textarea { resize: vertical; min-height: 60px; }
-    button { margin-top: 15px; padding: 12px 20px; background: #f5a623; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-    button:hover { background: #e5941e; }
-    .event-group { margin-bottom: 15px; border: 1px solid #ccc; padding: 10px; border-radius: 6px; }
-    .event-group input { margin-bottom: 5px; }
-  </style>
+<title>Church Admin</title>
+<style>
+body {
+  font-family: Arial;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+textarea, input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+button {
+  padding: 10px 20px;
+  background: #f5a623;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+h3 {margin-top: 30px;}
+.event-block {border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px;}
+.add-event {margin-bottom: 20px;}
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Charity Tabernacle Admin Panel</h1>
-  <p>Edit announcements, daily quotes, service times, and upcoming events</p>
-</header>
+<h2>Church Admin Panel</h2>
 
-<section>
-  <h2>Announcements</h2>
-  <textarea id="announcements" placeholder="Enter announcements..."></textarea>
-</section>
+<label>Announcements</label>
+<textarea id="announcements" rows="4" placeholder="Enter announcements..."></textarea>
 
-<section>
-  <h2>Daily Quote</h2>
-  <textarea id="dailyQuote" placeholder="Enter daily quote, paragraphs allowed..."></textarea>
-</section>
+<label>Daily Quote</label>
+<textarea id="dailyQuote" rows="4" placeholder="Enter daily quote..."></textarea>
 
-<section>
-  <h2>Service Times</h2>
-  <textarea id="serviceTimes" placeholder="Enter service times, paragraphs allowed..."></textarea>
-</section>
+<label>Service Times</label>
+<textarea id="services" rows="2" placeholder="Enter service times..."></textarea>
 
-<section>
-  <h2>Upcoming Events</h2>
-  <div id="eventsContainer"></div>
-  <button type="button" onclick="addEvent()">Add Event</button>
-</section>
+<label>Banner Image URL</label>
+<input id="bannerImage" placeholder="Enter banner image URL">
 
-<section>
-  <button type="button" onclick="saveData()">Save & Update Site</button>
-</section>
+<h3>Upcoming Events</h3>
+<div id="eventsContainer"></div>
+<button class="add-event" onclick="addEvent()">+ Add Event</button>
+
+<button onclick="generate()">Generate Update</button>
+
+<h3>Copy this into churchData.json</h3>
+<textarea id="output" style="height:300px"></textarea>
 
 <script>
-  // Function to add new event input group
-  function addEvent(title = '', date = '', location = '') {
-    const container = document.getElementById('eventsContainer');
-    const div = document.createElement('div');
-    div.className = 'event-group';
-    div.innerHTML = `
-      <label>Event Title</label>
-      <input type="text" class="eventTitle" value="${title}" placeholder="Enter event title">
-      <label>Date</label>
-      <input type="text" class="eventDate" value="${date}" placeholder="Enter date">
-      <label>Location</label>
-      <input type="text" class="eventLocation" value="${location}" placeholder="Enter location">
-      <button type="button" onclick="removeEvent(this)">Remove Event</button>
-    `;
-    container.appendChild(div);
-  }
+let eventCount = 0;
 
-  // Remove event group
-  function removeEvent(btn) {
-    btn.parentElement.remove();
-  }
+function addEvent(){
+  eventCount++;
+  const container = document.getElementById("eventsContainer");
+  const div = document.createElement("div");
+  div.className = "event-block";
+  div.id = "event-" + eventCount;
+  div.innerHTML = `
+    <label>Event Title</label>
+    <input placeholder="Event Title" class="eventTitle">
+    <label>Event Date</label>
+    <input placeholder="Event Date" class="eventDate">
+    <label>Event Location</label>
+    <input placeholder="Event Location" class="eventLocation">
+    <button onclick="removeEvent(${eventCount})" style="background:red;margin-top:5px;">Remove Event</button>
+  `;
+  container.appendChild(div);
+}
 
-  // Save JSON data
-  function saveData() {
-    const data = {
-      announcements: document.getElementById('announcements').value,
-      dailyQuote: document.getElementById('dailyQuote').value,
-      services: document.getElementById('serviceTimes').value,
-      upcomingEvents: []
-    };
+function removeEvent(id){
+  const div = document.getElementById("event-" + id);
+  div.remove();
+}
 
-    const eventGroups = document.querySelectorAll('.event-group');
-    eventGroups.forEach(group => {
-      data.upcomingEvents.push({
-        title: group.querySelector('.eventTitle').value,
-        date: group.querySelector('.eventDate').value,
-        location: group.querySelector('.eventLocation').value
-      });
-    });
-
-    // Convert to JSON string
-    const jsonStr = JSON.stringify(data, null, 2);
-
-    // Save JSON to server or local storage
-    // For now, we'll allow download
-    const blob = new Blob([jsonStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'churchData.json';
-    a.click();
-    URL.revokeObjectURL(url);
-
-    alert('Data saved! Upload churchData.json to your server where index.html can access it.');
-  }
-
-  // Load existing data if churchData.json exists
-  async function loadData() {
-    try {
-      const res = await fetch('churchData.json');
-      const data = await res.json();
-      document.getElementById('announcements').value = data.announcements || '';
-      document.getElementById('dailyQuote').value = data.dailyQuote || '';
-      document.getElementById('serviceTimes').value = data.services || '';
-
-      if(data.upcomingEvents && data.upcomingEvents.length) {
-        data.upcomingEvents.forEach(ev => addEvent(ev.title, ev.date, ev.location));
-      } else {
-        addEvent(); // at least one empty event
-      }
-    } catch (e) {
-      addEvent(); // if no JSON exists, start with one empty event
+function generate(){
+  const events = [];
+  document.querySelectorAll(".event-block").forEach(block => {
+    const title = block.querySelector(".eventTitle").value;
+    const date = block.querySelector(".eventDate").value;
+    const location = block.querySelector(".eventLocation").value;
+    if(title || date || location){
+      events.push({title, date, location});
     }
-  }
+  });
 
-  loadData();
+  const data = {
+    announcements: document.getElementById("announcements").value,
+    dailyQuote: document.getElementById("dailyQuote").value,
+    services: document.getElementById("services").value,
+    bannerImage: document.getElementById("bannerImage").value,
+    upcomingEvents: events
+  };
+
+  document.getElementById("output").value = JSON.stringify(data, null, 2);
+}
 </script>
 
 </body>
