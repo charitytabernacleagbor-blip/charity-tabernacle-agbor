@@ -170,14 +170,9 @@ img{
 <section>
   <h2>Last Live Service</h2>
   <div class="video">
-    <!-- Always shows the latest uploaded video from your playlist -->
-    <iframe
-      src="https://www.youtube.com/embed?listType=playlist&list=UUwLLSjfGQBN0ZAA1wIK0fCQ&index=1"
-      allowfullscreen
-      allow="autoplay; encrypted-media"
-      frameborder="0"
-      style="width:100%; height:600px;">
-    </iframe>
+    <video id="lastLive" playsinline controls data-poster="Banner.jpg">
+      <source src="" type="video/youtube">
+    </video>
   </div>
 </section>
 
@@ -236,7 +231,26 @@ img{
 <!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script>
+  // Initialize Plyr
   const livePlayer = new Plyr('#livePlayer');
+  const lastLivePlayer = new Plyr('#lastLive');
+
+  // Load JSON for last service video
+  fetch('/data/churchData.json')
+    .then(res => res.json())
+    .then(data => {
+      if(data.lastServiceVideoID){
+        const lastSource = document.querySelector('#lastLive source');
+        lastSource.src = "https://www.youtube.com/watch?v=" + data.lastServiceVideoID;
+        lastLivePlayer.reload();
+      } else {
+        // No last service yet → show banner
+        const lastVideo = document.getElementById('lastLive');
+        lastVideo.poster = 'Banner.jpg';
+        lastVideo.style.display = 'block';
+      }
+    })
+    .catch(err => console.log("Error loading JSON:", err));
 </script>
 
 </body>
