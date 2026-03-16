@@ -31,6 +31,9 @@ button:hover{background:#e5941e;}
   <h2>Events</h2>
   <textarea id="eventsText" rows="5" placeholder="Enter upcoming events here..."></textarea>
   
+  <h2>Daily Quote</h2>
+  <textarea id="dailyQuoteText" rows="2" placeholder="Enter today's quote here..."></textarea>
+  
   <button onclick="saveData()">Save Changes</button>
   
   <p id="status" style="color:green; font-weight:bold;"></p>
@@ -38,38 +41,6 @@ button:hover{background:#e5941e;}
 
 <script>
 const PASSWORD = "CharityAdmin2026"; // Change to your preferred password
-
-function login() {
-  const pass = document.getElementById("adminPassword").value;
-  if(pass === PASSWORD) {
-    document.getElementById("adminContent").style.display = "block";
-    document.getElementById("adminPassword").style.display = "none";
-    document.querySelector("button").style.display = "none";
-  } else {
-    alert("Incorrect password");
-  }
-}
-
-// Load saved data if exists
-const savedData = localStorage.getItem("churchData");
-if(savedData){
-  const data = JSON.parse(savedData);
-  document.getElementById("announcementsText").value = data.announcements || "";
-  document.getElementById("servicesText").value = data.services || "";
-  document.getElementById("eventsText").value = data.events || "";
-}
-
-function saveData(){
-  const data = {
-    announcements: document.getElementById("announcementsText").value,
-    services: document.getElementById("servicesText").value,
-    events: document.getElementById("eventsText").value
-  };
-  localStorage.setItem("churchData", JSON.stringify(data));
-  document.getElementById("status").innerText = "Changes saved locally!";
-}
-<script>
-const PASSWORD = "CharityAdmin2026"; // change if needed
 const DATA_FILE = "/data/churchData.json";
 
 function login() {
@@ -84,7 +55,6 @@ function login() {
   }
 }
 
-// Load data from JSON file
 async function loadData(){
   try{
     const response = await fetch(DATA_FILE);
@@ -93,16 +63,28 @@ async function loadData(){
       document.getElementById("announcementsText").value = data.announcements || "";
       document.getElementById("servicesText").value = data.services || "";
       document.getElementById("eventsText").value = data.events || "";
-    } else {
-      console.log("Data file not found. Using defaults.");
+      document.getElementById("dailyQuoteText").value = data.dailyQuote || "";
     }
   } catch(err){
     console.log("Error loading data:", err);
   }
 }
 
-// Save changes to JSON (via Vercel API or Netlify functions later)
 function saveData(){
+  const data = {
+    announcements: document.getElementById("announcementsText").value,
+    services: document.getElementById("servicesText").value,
+    events: document.getElementById("eventsText").value,
+    dailyQuote: document.getElementById("dailyQuoteText").value
+  };
+
+  localStorage.setItem("churchData", JSON.stringify(data));
+  alert("Changes saved locally! Next step will push to server.");
+}
+</script>
+
+</body>
+</html>function saveData(){
   const data = {
     announcements: document.getElementById("announcementsText").value,
     services: document.getElementById("servicesText").value,
