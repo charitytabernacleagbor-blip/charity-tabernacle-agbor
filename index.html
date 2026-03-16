@@ -21,6 +21,7 @@ header {
 }
 header img {
   height: 80px;
+  margin-bottom: 10px;
 }
 header a {
   color: #f5a623;
@@ -30,6 +31,18 @@ header a {
 }
 header a:hover {
   text-decoration: underline;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+}
+.banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* Sections */
@@ -47,6 +60,30 @@ section h2 {
   color: #111;
 }
 
+/* Daily Quote */
+#dailyQuote {
+  font-style: italic;
+  color: #f5a623;
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+/* Events Grid */
+.events-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.event-card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 280px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
 /* Videos */
 .video {
   max-width: 800px;
@@ -61,16 +98,22 @@ footer {
   text-align: center;
 }
 
-#dailyQuote {
-  font-style: italic;
-  color: #f5a623;
-  margin: 15px 0;
-  font-size: 18px;
+/* Prayer Request Button */
+.prayer-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
 }
 </style>
-
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-
 </head>
 <body>
 
@@ -86,12 +129,20 @@ footer {
   </p>
 </header>
 
+<!-- Banner -->
+<div class="banner">
+  <img src="Banner.png" alt="Charity Banner">
+</div>
+
 <!-- Announcements -->
 <section>
   <h2>Announcements</h2>
   <p id="announcements">Loading announcements...</p>
-  
-  <!-- Daily Quote replaces old Daily Scriptures -->
+</section>
+
+<!-- Daily Quote -->
+<section>
+  <h2>Daily Quote</h2>
   <div id="dailyQuote">Loading daily quote...</div>
 </section>
 
@@ -101,13 +152,28 @@ footer {
   <p id="services">Loading service times...</p>
 </section>
 
-<!-- Events -->
+<!-- Upcoming Events -->
 <section>
   <h2>Upcoming Events</h2>
-  <p id="events">Loading events...</p>
+  <div class="events-grid">
+    <div class="event-card">
+      <h3>Enugu Easter Convention</h3>
+      <p>April 2nd - 6th, 2026</p>
+      <p>Rapture Time Christian Assembly Auditorium</p>
+    </div>
+    <div class="event-card">
+      <h3>Maricopa Valley Convention</h3>
+      <p>August 13th - 16th, 2026</p>
+      <p>Crown Plaza, Phoenix</p>
+    </div>
+    <div class="event-card">
+      <h3>Isiokpo Youth Convention</h3>
+      <p>September 3rd - 7th, 2026</p>
+    </div>
+  </div>
 </section>
 
-<!-- Live Player (Plyr + YouTube) -->
+<!-- Live Player -->
 <section>
   <h2>Watch Live</h2>
   <div class="video">
@@ -117,22 +183,34 @@ footer {
   </div>
 </section>
 
+<!-- Deacons / Contact -->
+<section>
+  <h2>Contact / Deacons</h2>
+  <p>Bro Samson Eigbochie | +234 803 725 6852</p>
+  <p>Bro Ikechukwu Moses | +234 706 621 7152</p>
+  <p>Address: 19b Abiamuwe, Agbor, Delta State Nigeria</p>
+</section>
+
 <!-- Footer -->
 <footer>
   <p>© 2026 Charity Tabernacle Agbor</p>
 </footer>
 
+<!-- Prayer Request Button -->
+<a href="https://wa.me/2348033595016?text=Hello%20Pastor,%20I%20have%20a%20prayer%20request" class="prayer-btn">
+📩 Prayer Request
+</a>
+
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script>
 const player = new Plyr('#player');
 
-// Fetch data from JSON
+// Fetch data dynamically from JSON
 fetch('/data/churchData.json')
   .then(res => res.json())
   .then(data => {
     document.getElementById('announcements').innerText = data.announcements || "";
     document.getElementById('services').innerText = data.services || "";
-    document.getElementById('events').innerText = data.events || "";
     document.getElementById('dailyQuote').innerText = data.dailyQuote || "";
   })
   .catch(err => console.log(err));
