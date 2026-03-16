@@ -68,6 +68,51 @@ function saveData(){
   localStorage.setItem("churchData", JSON.stringify(data));
   document.getElementById("status").innerText = "Changes saved locally!";
 }
+<script>
+const PASSWORD = "CharityAdmin2026"; // change if needed
+const DATA_FILE = "/data/churchData.json";
+
+function login() {
+  const pass = document.getElementById("adminPassword").value;
+  if(pass === PASSWORD){
+    document.getElementById("adminContent").style.display = "block";
+    document.getElementById("adminPassword").style.display = "none";
+    document.querySelector("button").style.display = "none";
+    loadData();
+  } else {
+    alert("Incorrect password");
+  }
+}
+
+// Load data from JSON file
+async function loadData(){
+  try{
+    const response = await fetch(DATA_FILE);
+    if(response.ok){
+      const data = await response.json();
+      document.getElementById("announcementsText").value = data.announcements || "";
+      document.getElementById("servicesText").value = data.services || "";
+      document.getElementById("eventsText").value = data.events || "";
+    } else {
+      console.log("Data file not found. Using defaults.");
+    }
+  } catch(err){
+    console.log("Error loading data:", err);
+  }
+}
+
+// Save changes to JSON (via Vercel API or Netlify functions later)
+function saveData(){
+  const data = {
+    announcements: document.getElementById("announcementsText").value,
+    services: document.getElementById("servicesText").value,
+    events: document.getElementById("eventsText").value
+  };
+  
+  // For now, we just save locally (next we’ll implement server write)
+  localStorage.setItem("churchData", JSON.stringify(data));
+  alert("Changes saved locally. Next step will make it update live site!");
+}
 </script>
 
 </body>
