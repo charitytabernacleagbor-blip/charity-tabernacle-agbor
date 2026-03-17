@@ -1,158 +1,150 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Church Admin Panel</title>
+  <title>Church Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
+    body{
       font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
+      max-width:900px;
+      margin:auto;
+      padding:20px;
+      background:#f5f5f5;
     }
 
-    label {
-      font-weight: bold;
-      margin-top: 15px;
-      display: block;
+    h2{
+      text-align:center;
+      color:#111;
+      margin-bottom:20px;
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      box-sizing: border-box;
+    label{
+      font-weight:bold;
     }
 
-    button {
-      padding: 10px 20px;
-      background: #f5a623;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-bottom: 20px;
+    input, textarea{
+      width:100%;
+      padding:10px;
+      margin-bottom:15px;
+      box-sizing:border-box;
     }
 
-    .event-block {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 6px;
-      position: relative;
+    button{
+      padding:10px 20px;
+      background:#f5a623;
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-size:16px;
     }
 
-    .remove-btn {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      background: red;
-      color: white;
-      border: none;
-      padding: 3px 6px;
-      cursor: pointer;
-      border-radius: 4px;
+    .event-card{
+      border:1px solid #ddd;
+      padding:10px;
+      margin-bottom:10px;
+      border-radius:5px;
+      background:white;
     }
 
-    h2 {
-      text-align: center;
-      color: #111;
-      margin-bottom: 20px;
+    .event-card input{
+      width:calc(100% - 20px);
+      margin-bottom:5px;
     }
 
-    #output {
-      height: 300px;
-      font-family: monospace;
+    /* Hide content initially */
+    #adminContent{
+      display:none;
     }
   </style>
 </head>
 <body>
 
+<div id="adminContent">
+
 <h2>Church Admin Panel</h2>
 
+<!-- Announcements -->
 <label>Announcements</label>
 <textarea id="announcements" rows="4" placeholder="Enter announcements here..."></textarea>
 
+<!-- Daily Quote -->
 <label>Daily Quote</label>
-<textarea id="dailyQuote" rows="4" placeholder="Enter daily quote here..."></textarea>
+<textarea id="dailyQuote" rows="3" placeholder="Enter daily quote here..."></textarea>
 
-<label>Service Times</label>
-<textarea id="services" rows="2" placeholder="Enter service times..."></textarea>
+<!-- Service Times -->
+<label>Sunday Service Time</label>
+<input id="sundayService" placeholder="e.g., 9:00 AM">
 
+<label>Wednesday Service Time</label>
+<input id="wednesdayService" placeholder="e.g., 6:00 PM">
+
+<!-- Banner Image -->
 <label>Banner Image URL</label>
-<input id="bannerImage" placeholder="Enter banner image URL">
+<input id="bannerImage" placeholder="e.g., Banner.jpg">
 
+<!-- Upcoming Events -->
 <h3>Upcoming Events</h3>
 <div id="eventsContainer"></div>
 <button onclick="addEvent()">Add Event</button>
 
+<!-- Generate JSON -->
+<h3>Copy this into churchData.json</h3>
+<textarea id="output" style="height:300px;"></textarea>
+<br>
 <button onclick="generate()">Generate Update</button>
 
-<h3>Generated JSON (for reference)</h3>
-<textarea id="output" readonly></textarea>
+</div>
 
 <script>
-  // Load from localStorage if available
-  window.onload = () => {
-    const storedData = localStorage.getItem("churchData");
-    if(storedData){
-      const data = JSON.parse(storedData);
-      document.getElementById('announcements').value = data.announcements || '';
-      document.getElementById('dailyQuote').value = data.dailyQuote || '';
-      document.getElementById('services').value = data.services || '';
-      document.getElementById('bannerImage').value = data.bannerImage || '';
+  // PASSWORD
+  const PASSWORD = "CharityAdmin2026"; // <-- updated password
 
-      // Populate events
-      if(data.upcomingEvents && data.upcomingEvents.length){
-        data.upcomingEvents.forEach(ev => createEventBlock(ev.title, ev.date, ev.location));
-      }
-    }
-  };
+  const userPass = prompt("Enter Admin Password:");
+  if(userPass === PASSWORD){
+    document.getElementById("adminContent").style.display = "block";
+  } else {
+    alert("Incorrect password! Access denied.");
+    document.body.innerHTML = "<h2 style='text-align:center;color:red;'>Access Denied</h2>";
+  }
 
-  function createEventBlock(title='', date='', location=''){
+  // Add a new event card
+  function addEvent(){
     const container = document.getElementById('eventsContainer');
     const div = document.createElement('div');
-    div.className = 'event-block';
+    div.className = 'event-card';
     div.innerHTML = `
-      <button class="remove-btn" onclick="this.parentElement.remove()">X</button>
-      <label>Event Title</label>
-      <input class="eventTitle" value="${title}" placeholder="Event title">
-      <label>Event Date</label>
-      <input class="eventDate" value="${date}" placeholder="Event date">
-      <label>Event Location</label>
-      <input class="eventLocation" value="${location}" placeholder="Event location">
+      <input type="text" placeholder="Event Title" class="ev-title"><br>
+      <input type="text" placeholder="Date" class="ev-date"><br>
+      <input type="text" placeholder="Location" class="ev-location"><br>
+      <button onclick="removeEvent(this)">Remove Event</button>
     `;
     container.appendChild(div);
   }
 
-  function addEvent(){
-    createEventBlock();
+  function removeEvent(btn){
+    btn.parentElement.remove();
   }
 
+  // Generate JSON
   function generate(){
-    const events = [];
-    document.querySelectorAll(".event-block").forEach(block => {
-      const title = block.querySelector(".eventTitle").value;
-      const date = block.querySelector(".eventDate").value;
-      const location = block.querySelector(".eventLocation").value;
-      if(title || date || location){
-        events.push({title, date, location});
-      }
-    });
+    const events = Array.from(document.querySelectorAll('.event-card')).map(ev => ({
+      title: ev.querySelector('.ev-title').value,
+      date: ev.querySelector('.ev-date').value,
+      location: ev.querySelector('.ev-location').value
+    }));
 
     const data = {
-      announcements: document.getElementById("announcements").value,
-      dailyQuote: document.getElementById("dailyQuote").value,
-      services: document.getElementById("services").value,
-      bannerImage: document.getElementById("bannerImage").value,
-      upcomingEvents: events
+      announcements: document.getElementById('announcements').value,
+      dailyQuote: document.getElementById('dailyQuote').value,
+      services: {
+        sunday: document.getElementById('sundayService').value,
+        wednesday: document.getElementById('wednesdayService').value
+      },
+      bannerImage: document.getElementById('bannerImage').value,
+      events: events
     };
 
-    // Save to localStorage
-    localStorage.setItem("churchData", JSON.stringify(data));
-
-    // Show JSON output
-    document.getElementById("output").value = JSON.stringify(data, null, 2);
-    alert("Changes saved! Your homepage will now fetch the latest data.");
+    document.getElementById('output').value = JSON.stringify(data,null,2);
   }
 </script>
 
