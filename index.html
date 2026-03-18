@@ -1,102 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Charity Tabernacle Agbor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charity Tabernacle Agbor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Plyr CSS -->
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<!-- Plyr CSS -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
-  <style>
-    body{
-      font-family: Arial, sans-serif;
-      margin:0;
-      background:#f5f5f5;
-    }
-    header{
-      background:#111;
-      color:white;
-      padding:20px;
-      text-align:center;
-      border-bottom:3px solid #f5a623;
-    }
-    header img{ height:80px; margin-bottom:10px; }
-    header a{ color:#f5a623; text-decoration:none; margin:0 10px; font-weight:bold; }
-    header a:hover{ text-decoration:underline; }
+<style>
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f5f5f5;
+}
 
-    section{
-      padding:30px 20px;
-      background:#f9f9f9;
-      margin-bottom:20px;
-      border-radius:8px;
-      text-align:center;
-    }
+header{
+  background:#111;
+  color:white;
+  padding:20px;
+  text-align:center;
+  border-bottom:3px solid #f5a623;
+}
 
-    section h2{
-      text-align:center;
-      color:#111;
-      margin-bottom:20px;
-    }
+header img{
+  height:80px;
+  margin-bottom:10px;
+}
 
-    .video {
-      max-width: 1920px;
-      width: 100%;
-      margin: 20px auto;
-    }
+header a{
+  color:#f5a623;
+  text-decoration:none;
+  margin:0 10px;
+  font-weight:bold;
+}
 
-    footer{
-      background:#111;
-      color:white;
-      padding:20px;
-      text-align:center;
-    }
+header a:hover{
+  text-decoration:underline;
+}
 
-    img{ border-radius:8px; }
+section{
+  padding:30px 20px;
+  background:#f9f9f9;
+  margin-bottom:20px;
+  border-radius:8px;
+  text-align:center;
+}
 
-    .ticker{
-      background:#f5a623;
-      color:white;
-      padding:10px;
-      font-weight:bold;
-    }
+section h2{
+  text-align:center;
+  color:#111;
+  margin-bottom:20px;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:20px;
-      max-width:1100px;
-      margin:auto;
-    }
+.video {
+  max-width: 1920px;
+  width: 100%;
+  margin: 20px auto;
+}
 
-    .card{
-      background:white;
-      padding:15px;
-      border-radius:8px;
-      box-shadow:0 4px 6px rgba(0,0,0,0.1);
-    }
+footer{
+  background:#111;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
 
-    .card p{
-      margin-top:8px;
-      font-weight:bold;
-    }
+img{
+  border-radius:8px;
+}
 
-    .events p{
-      margin:8px 0;
-    }
+.ticker{
+  background:#f5a623;
+  color:white;
+  padding:10px;
+  font-weight:bold;
+}
 
-    #dailyQuote {
-      color: black;
-      font-size: 18px;
-      margin-top: 10px;
-      font-style: normal;
-    }
-  </style>
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.card{
+  background:white;
+  padding:15px;
+  border-radius:8px;
+  box-shadow:0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card p{
+  margin-top:8px;
+  font-weight:bold;
+}
+
+.events p{
+  margin:8px 0;
+}
+
+#dailyQuote {
+  color: black;
+  font-size: 18px;
+  margin-top: 10px;
+  font-style: normal;
+}
+</style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- Header with Logo -->
 <header>
-  <a href="index.html"><img src="Logo.png" alt="Charity Tabernacle Logo"></a>
+  <a href="index.html">
+    <img src="Logo.png" alt="Charity Tabernacle Logo">
+  </a>
   <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
   <p>Raising Lives Through The Word of God</p>
   <p>Pastor Eugene Uzoma Ibeabuchi</p>
@@ -114,9 +132,9 @@
   </marquee>
 </section>
 
-<!-- Banner -->
+<!-- Banner Image -->
 <section>
-  <img src="Banner.jpg" style="width:100%;max-height:1920px;object-fit:cover;">
+  <img src="Banner.jpg" style="width:100%;max-height:400px;object-fit:cover;">
 </section>
 
 <!-- Announcements -->
@@ -134,15 +152,15 @@
 <!-- Service Times -->
 <section>
   <h2>Service Times</h2>
-  <p>Sunday Worship Service – Doors Open 9:00 AM | Service Starts 5:00 PM</p>
-  <p>Wednesday Worship Service – Doors Open 4:30 PM | Service Starts 5:00 PM</p>
+  <p>Sunday Worship Service – 9:00 AM</p>
+  <p>Wednesday Worship Service – 6:00 PM</p>
 </section>
 
 <!-- Watch Live -->
 <section>
   <h2>Watch Live Service</h2>
   <div class="video">
-    <div id="livePlayer"></div>
+    <div id="livePlayer"></div> <!-- Dynamic Plyr player -->
   </div>
 </section>
 
@@ -150,7 +168,7 @@
 <section>
   <h2>Last Live Service</h2>
   <div class="video">
-    <div id="lastServicePlayer"></div>
+    <video id="lastServicePlayer" playsinline controls data-poster="Banner.jpg"></video>
   </div>
 </section>
 
@@ -198,7 +216,7 @@
   <p>© 2026 Charity Tabernacle Agbor</p>
 </footer>
 
-<!-- Prayer Button -->
+<!-- Prayer Request Button -->
 <a href="https://wa.me/2348033595016?text=Hello%20Pastor,%20I%20have%20a%20prayer%20request"
    style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;
    padding:15px 20px;border-radius:50px;text-decoration:none;font-weight:bold;
@@ -208,40 +226,36 @@
 
 <!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
-<!-- Church Data -->
-<script src="churchData.json"></script>
-
 <script>
-  // Load church data if available
-  fetch('churchData.json')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('announcements').innerHTML = data.announcements.replace(/\n/g,'<br>');
-      document.getElementById('dailyQuote').innerHTML = data.dailyQuote.replace(/\n/g,'<br>');
-      document.getElementById('tickerText').innerHTML = data.services;
-    })
-    .catch(err => console.warn('Church data not found:', err));
-
-  // Live Player (Plyr + YouTube)
+  // 1. Live Service Player
+  const liveVideoId = 'UCwLLSjfGQBN0ZAA1wIK0fCQ'; // Your live video ID
   const livePlayer = new Plyr('#livePlayer', {
     type: 'youtube',
-    videoId: 'UCwLLSjfGQBN0ZAA1wIK0fCQ' // Replace with your live video ID
+    videoId: liveVideoId,
+    autoplay: false
   });
 
+  // 2. Last Live Service Player
   const lastServicePlayer = new Plyr('#lastServicePlayer');
 
-  // YouTube API for latest video
+  // YouTube API settings
   const API_KEY = 'AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc';
-  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
+  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ'; // Your uploads playlist ID
 
+  // Fetch latest video from playlist
   fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
-      const videoId = data.items[0].snippet.resourceId.videoId;
+      const latestVideoId = data.items[0].snippet.resourceId.videoId;
+
       lastServicePlayer.source = {
         type: 'video',
-        sources: [{ src: videoId, provider: 'youtube' }]
+        sources: [
+          {
+            src: latestVideoId,
+            provider: 'youtube',
+          }
+        ]
       };
     })
     .catch(err => console.error('Error fetching latest video:', err));
