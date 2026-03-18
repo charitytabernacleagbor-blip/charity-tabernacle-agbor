@@ -148,14 +148,15 @@ img{
 <section>
   <h2>Service Times</h2>
   <p>Sunday Worship Service – Doors Open 9:00 AM | Service Starts 10:00 AM</p>
-  <p>Wednesday Worship Service – Doors Open 4:30 PM | Service Starts 5:30 PM</p>
+  <p>Wednesday Worship Service – Doors Open 4:30 PM | Service Stars 5:30 PM</p>
 </section>
 
-<!-- Watch Live Service (Auto-Play) -->
 <section>
   <h2>Watch Live Service</h2>
   <div class="video">
-    <div id="livePlayerContainer"></div>
+    <video id="livePlayer" playsinline controls data-poster="Banner.jpg">
+      <source src="https://www.youtube.com/watch?v=UCwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
+    </video>
   </div>
 </section>
 
@@ -213,68 +214,57 @@ box-shadow:0 4px 8px rgba(0,0,0,0.2);z-index:1000;">
 📩 Prayer Request
 </a>
 
-<!-- Plyr JS -->
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
 <script>
-  // Last live service
-  const lastServicePlayer = new Plyr('#lastServicePlayer');
-  const API_KEY = 'AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc';
-  const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
+const livePlayer = new Plyr('#livePlayer');
+const lastServicePlayer = new Plyr('#lastServicePlayer');
 
-  fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
-  .then(response => response.json())
-  .then(data => {
-    const latestVideoId = data.items[0].snippet.resourceId.videoId;
-    lastServicePlayer.source = {
-      type: 'video',
-      sources: [
-        { src: latestVideoId, provider: 'youtube' }
-      ]
-    };
-  })
-  .catch(err => console.error('Error fetching latest video:', err));
+const API_KEY = 'AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc';
+const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
 
-  // Watch live service (auto-play muted)
-  const LIVE_VIDEO_ID = 'UCwLLSjfGQBN0ZAA1wIK0fCQ'; // Replace with your live stream ID
+fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
+.then(response => response.json())
+.then(data => {
 
-  const livePlayer = new Plyr('#livePlayerContainer', {
-    controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-    autoplay: true,
-    muted: true, // Required for browser autoplay
-    youtube: {
-      noCookie: true,
-      rel: 0,
-      showinfo: 0,
-      modestbranding: 1
-    }
-  });
+const latestVideoId = data.items[0].snippet.resourceId.videoId;
 
-  livePlayer.source = {
-    type: 'video',
-    sources: [
-      { src: LIVE_VIDEO_ID, provider: 'youtube' }
-    ]
-  };
+lastServicePlayer.source = {
+type: 'video',
+sources: [
+{
+src: latestVideoId,
+provider: 'youtube',
+}
+]
+};
+
+})
+.catch(err => console.error('Error fetching latest video:', err));
 </script>
 
-<!-- JSON loader (for dynamic text updates) -->
+<!-- JSON loader (added only for dynamic text updates) -->
 <script>
 fetch('churchData.json')
 .then(response => response.json())
 .then(data => {
-  if(data.announcements){
-    document.getElementById("announcements").innerHTML =
-      data.announcements.replace(/\n/g,"<br>");
-    document.getElementById("tickerText").innerHTML =
-      data.announcements.replace(/\n/g," | ");
-  }
-  if(data.dailyQuote){
-    document.getElementById("dailyQuote").innerHTML =
-      data.dailyQuote.replace(/\n/g,"<br>");
-  }
+
+if(data.announcements){
+document.getElementById("announcements").innerHTML =
+data.announcements.replace(/\n/g,"<br>");
+
+document.getElementById("tickerText").innerHTML =
+data.announcements.replace(/\n/g," | ");
+}
+
+if(data.dailyQuote){
+document.getElementById("dailyQuote").innerHTML =
+data.dailyQuote.replace(/\n/g,"<br>");
+}
+
 })
 .catch(err => console.log("churchData.json not found"));
+
 </script>
 
 </body>
