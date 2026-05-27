@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Member Login - Charity Tabernacle Agbor</title>
+<title>Login - Charity Tabernacle Agbor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="Logo.png">
 
@@ -26,7 +26,7 @@ body{
 .login-box{
   background:#f5f1e8;
   width:100%;
-  max-width:420px;
+  max-width:430px;
   padding:35px;
   border-radius:14px;
   box-shadow:0 10px 30px rgba(0,0,0,0.35);
@@ -75,6 +75,23 @@ button:hover{
   background:#8b6508;
 }
 
+.register-btn{
+  display:block;
+  text-align:center;
+  margin-top:15px;
+  background:#1b1208;
+  color:#f5c46b;
+  padding:12px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  border:2px solid #b8860b;
+}
+
+.register-btn:hover{
+  background:#2a1b0d;
+}
+
 .error{
   color:#b00020;
   margin-top:15px;
@@ -89,6 +106,10 @@ button:hover{
   text-decoration:none;
   font-weight:600;
 }
+
+.back:hover{
+  text-decoration:underline;
+}
 </style>
 </head>
 
@@ -96,16 +117,28 @@ button:hover{
 
 <div class="login-box">
   <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+
   <h1>Member Login</h1>
-  <p>Enter your access password to continue.</p>
+
+  <p>
+    Enter your access password to continue.
+  </p>
 
   <input type="password" id="password" placeholder="Enter password">
 
   <button onclick="login()">Login</button>
 
-  <div class="error" id="error">Incorrect password. Please try again.</div>
+  <a href="register.html" class="register-btn">
+    Create Account / Register
+  </a>
 
-  <a href="index.html" class="back">← Back to Home</a>
+  <div class="error" id="error">
+    Incorrect password. Please try again.
+  </div>
+
+  <a href="index.html" class="back">
+    ← Back to Home
+  </a>
 </div>
 
 <script>

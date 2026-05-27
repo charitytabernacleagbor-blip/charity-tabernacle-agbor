@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register - Charity Tabernacle Agbor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="Logo.png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background:#f5f1e8;
+  color:#222;
+}
+
+header{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+
+header img{height:70px;}
+
+header h1{
+  color:#f5c46b;
+  margin-top:10px;
+}
+
+section{
+  max-width:850px;
+  margin:auto;
+  padding:45px 20px;
+}
+
+.form-box{
+  background:white;
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  border-top:5px solid #b8860b;
+}
+
+label{
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+  color:#1b1208;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:13px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.button{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:12px 18px;
+  border:none;
+  border-radius:7px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:18px;
+  cursor:pointer;
+}
+
+.button:hover{background:#8b6508;}
+
+.error{
+  display:none;
+  color:#b00020;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+.success{
+  display:none;
+  color:green;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+footer{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:22px;
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+  <h1>Registration Form</h1>
+  <p>Please register to gain access to our website</p>
+</header>
+
+<section>
+  <div class="form-box">
+
+    <form onsubmit="submitRegistration(event)">
+
+      <label>Full Name</label>
+      <input type="text" id="fullName" required>
+
+      <label>Username</label>
+      <input type="text" id="username" required>
+
+      <label>Email</label>
+      <input type="email" id="email" required>
+
+      <label>Phone</label>
+      <input type="tel" id="phone" required>
+
+      <label>Password</label>
+      <input type="password" id="password" required>
+
+      <label>Confirm Password</label>
+      <input type="password" id="confirmPassword" required>
+
+      <label>Church Name</label>
+      <input type="text" id="churchName" required>
+
+      <label>Country</label>
+      <select id="country" required>
+        <option value="">Select Country</option>
+      </select>
+
+      <label>Name of Pastor</label>
+      <input type="text" id="pastorName" required>
+
+      <label>Pastor's Email</label>
+      <input type="email" id="pastorEmail" required>
+
+      <label>Reason for Access</label>
+      <textarea id="reason" required></textarea>
+
+      <button type="submit" class="button">Submit Registration</button>
+      <a href="login.html" class="button">Back to Login</a>
+
+      <div class="error" id="errorMessage">Passwords do not match.</div>
+      <div class="success" id="successMessage">
+        Registration request prepared. Your email app will open.
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Charity Tabernacle Agbor. All Rights Reserved.</p>
+</footer>
+
+<script>
+const countries = [
+"Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan",
+"Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi",
+"Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic",
+"Democratic Republic of the Congo","Denmark","Djibouti","Dominica","Dominican Republic",
+"Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia",
+"Fiji","Finland","France",
+"Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana",
+"Haiti","Honduras","Hungary",
+"Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy",
+"Jamaica","Japan","Jordan",
+"Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan",
+"Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg",
+"Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar",
+"Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway",
+"Oman",
+"Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal",
+"Qatar",
+"Romania","Russia","Rwanda",
+"Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria",
+"Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu",
+"Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan",
+"Vanuatu","Vatican City","Venezuela","Vietnam",
+"Yemen","Zambia","Zimbabwe"
+];
+
+const countrySelect = document.getElementById("country");
+
+countries.forEach(country => {
+  const option = document.createElement("option");
+  option.value = country;
+  option.textContent = country;
+  countrySelect.appendChild(option);
+});
+
+function submitRegistration(event){
+  event.preventDefault();
+
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if(password !== confirmPassword){
+    document.getElementById("errorMessage").style.display = "block";
+    document.getElementById("successMessage").style.display = "none";
+    return;
+  }
+
+  const fullName = document.getElementById("fullName").value;
+  const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const churchName = document.getElementById("churchName").value;
+  const country = document.getElementById("country").value;
+  const pastorName = document.getElementById("pastorName").value;
+  const pastorEmail = document.getElementById("pastorEmail").value;
+  const reason = document.getElementById("reason").value;
+
+  const subject = encodeURIComponent("New Member Registration Request");
+  const body = encodeURIComponent(
+    "New registration request:\n\n" +
+    "Full Name: " + fullName + "\n" +
+    "Username: " + username + "\n" +
+    "Email: " + email + "\n" +
+    "Phone: " + phone + "\n" +
+    "Church Name: " + churchName + "\n" +
+    "Country: " + country + "\n" +
+    "Pastor Name: " + pastorName + "\n" +
+    "Pastor Email: " + pastorEmail + "\n\n" +
+    "Reason for Access:\n" + reason + "\n\n" +
+    "NOTE: Password was NOT sent by email for safety."
+  );
+
+  window.location.href =
+    "mailto:Charitytabernacle.agbor@gmail.com?subject=" + subject + "&body=" + body;
+
+  document.getElementById("errorMessage").style.display = "none";
+  document.getElementById("successMessage").style.display = "block";
+}
+</script>
+
+</body>
+</html>
