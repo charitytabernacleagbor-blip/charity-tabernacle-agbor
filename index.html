@@ -1,149 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Charity Tabernacle Agbor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="logo.png">
-
-<!-- Plyr -->
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="icon" type="image/png" href="Logo.png">
 
 <style>
-
-/* ===== GLOBAL ===== */
-body{
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+*{
   margin:0;
-  background:#f4f6f9;
-  color:#222;
+  padding:0;
+  box-sizing:border-box;
 }
 
-/* ===== HEADER ===== */
+body{
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background:#f5f1e8;
+  color:#222;
+  line-height:1.6;
+}
+
+/* HEADER */
 header{
-  background:#0c0c0c;
+  background:#1b1208;
   color:white;
-  padding:15px;
-  text-align:center;
   position:sticky;
   top:0;
   z-index:1000;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
 }
 
-header img{
+.header-inner{
+  max-width:1250px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{
   height:65px;
 }
 
-header h1{
-  margin:5px 0;
-  font-size:22px;
+.brand h1{
+  font-size:23px;
+  color:#f5c46b;
 }
 
-nav{
-  margin-top:10px;
+.brand p{
+  font-size:14px;
+  color:#eee;
 }
 
-nav a{
-  color:#f5a623;
+/* NAVIGATION */
+.main-nav{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.main-nav a{
+  color:white;
   text-decoration:none;
-  margin:0 10px;
+  padding:10px 12px;
   font-weight:600;
   font-size:14px;
-}
-
-nav a:hover{
-  color:white;
-}
-
-/* ===== TICKER ===== */
-.ticker{
-  background:#f5a623;
-  color:white;
-  overflow:hidden;
+  display:block;
   white-space:nowrap;
 }
 
-.ticker span{
-  display:inline-block;
-  padding:10px;
-  animation:scroll 15s linear infinite;
+.main-nav a:hover{
+  color:#f5c46b;
 }
 
-@keyframes scroll{
-  from{ transform:translateX(100%); }
-  to{ transform:translateX(-100%); }
+.dropdown{
+  position:relative;
 }
 
-/* ===== SECTIONS ===== */
-section{
-  padding:25px 15px;
-  max-width:1100px;
-  margin:auto;
+.dropdown-menu{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#2a1b0d;
+  min-width:230px;
+  border-top:3px solid #b8860b;
+  box-shadow:0 8px 20px rgba(0,0,0,0.35);
 }
 
-h2{
+.dropdown-menu a{
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.dropdown:hover > .dropdown-menu{
+  display:block;
+}
+
+.login-link{
+  background:#b8860b;
+  border-radius:6px;
+}
+
+.login-link:hover{
+  background:#8b6508;
+  color:white !important;
+}
+
+/* HERO */
+.hero{
+  min-height:82vh;
+  background:
+    linear-gradient(rgba(27,18,8,0.55), rgba(27,18,8,0.55)),
+    url("Banner.jpg") center center / contain no-repeat;
+  background-color:#1b1208;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   text-align:center;
+  color:white;
+  padding:40px 20px;
+}
+
+.hero-content{
+  max-width:850px;
+  opacity:0;
+  transform:translateY(35px);
+  animation:flowIn 1.4s ease forwards;
+}
+
+@keyframes flowIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.hero h2{
+  font-size:44px;
+  color:#f5c46b;
   margin-bottom:15px;
-  color:#111;
+  text-shadow:0 3px 10px rgba(0,0,0,0.6);
 }
 
-/* ===== HERO IMAGE ===== */
-.banner img{
-  width:100%;
-  border-radius:12px;
+.hero p{
+  font-size:21px;
+  margin-bottom:25px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.6);
 }
 
-/* ===== CARDS ===== */
+.button{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:13px 24px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+  margin:6px;
+}
+
+.button:hover{
+  background:#8b6508;
+}
+
+.button-outline{
+  background:transparent;
+  border:2px solid #f5c46b;
+  color:#f5c46b;
+}
+
+/* SECTIONS */
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.section-title h2{
+  font-size:30px;
+  color:#1b1208;
+}
+
+.section-title p{
+  color:#666;
+}
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
 }
 
 .card{
   background:white;
-  padding:15px;
+  padding:25px;
   border-radius:12px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.08);
-  transition:0.3s;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  border-top:4px solid #b8860b;
 }
 
-.card:hover{
-  transform:translateY(-5px);
+.card h3{
+  color:#1b1208;
+  margin-bottom:10px;
 }
 
-/* ===== VIDEO ===== */
-.video{
-  max-width:900px;
-  margin:auto;
-  border-radius:12px;
-  overflow:hidden;
+.card strong{
+  color:#1b1208;
 }
 
-/* ===== BUTTONS ===== */
-a.button{
-  display:inline-block;
-  background:#f5a623;
-  color:white;
-  padding:10px 15px;
-  border-radius:8px;
-  text-decoration:none;
-  margin-top:10px;
-}
-
-a.button:hover{
-  background:#d48f1c;
-}
-
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
-  background:#0c0c0c;
+  background:#1b1208;
   color:white;
   text-align:center;
-  padding:15px;
-  margin-top:20px;
+  padding:25px 15px;
 }
 
-/* ===== WHATSAPP FLOAT ===== */
 .whatsapp{
   position:fixed;
   bottom:20px;
@@ -154,78 +240,125 @@ footer{
   border-radius:50px;
   text-decoration:none;
   font-weight:bold;
-  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* ===== MOBILE ===== */
-@media(max-width:600px){
-  header h1{ font-size:18px; }
-  nav a{ font-size:13px; }
-}
+/* MOBILE */
+@media(max-width:900px){
+  .header-inner{
+    flex-direction:column;
+    text-align:center;
+  }
 
+  .main-nav{
+    justify-content:center;
+  }
+
+  .dropdown-menu{
+    position:static;
+    width:100%;
+    box-shadow:none;
+  }
+
+  .dropdown:hover > .dropdown-menu{
+    display:block;
+  }
+
+  .hero{
+    min-height:65vh;
+    background-size:cover;
+  }
+
+  .hero h2{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <img src="Logo.png">
-  <h1>Charity Tabernacle Agbor</h1>
-  <p>Raising Lives Through The Word</p>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="live.html">Watch Live</a>
-    <a href="sermons.html">Archive</a>
-  </nav>
-</header>
-
-<div class="ticker">
-  <span id="tickerText">
-    Sunday Service – 9AM | Wednesday – 4:30PM
-  </span>
-</div>
-
-<section class="banner">
-  <img src="Banner.jpg">
-</section>
-
-<section>
-  <h2>Announcements</h2>
-  <div class="card" id="announcements">
-    Sunday and Wednesday services are ongoing.
-  </div>
-</section>
-
-<section>
-  <h2>Daily Quote</h2>
-  <div class="card" id="dailyQuote">
-    "Trust in the Lord with all your heart." – Proverbs 3:5
-  </div>
-</section>
-
-<section>
-  <h2>Watch Live</h2>
-  <div class="video">
-    <video id="livePlayer" controls playsinline></video>
-  </div>
-</section>
-
-<section>
-  <h2>Last Service</h2>
-  <div class="video">
-    <video id="lastServicePlayer" controls playsinline></video>
-  </div>
-</section>
-
-<section>
-  <h2>Upcoming Events</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Enugu Easter Convention</h3>
-      <p>April 2–6, 2026</p>
+  <div class="header-inner">
+    <div class="brand">
+      <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+      <div>
+        <h1>Charity Tabernacle Agbor</h1>
+        <p>Raising Lives Through The Word</p>
+      </div>
     </div>
 
+    <nav class="main-nav">
+
+      <div class="dropdown">
+        <a href="index.html">Home ▾</a>
+        <div class="dropdown-menu">
+          <a href="donations.html">Donations & Offering</a>
+          <a href="sunday-school.html">Sunday School Scriptures</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="help.html">Help ▾</a>
+        <div class="dropdown-menu">
+          <a href="prayer-request.html">Prayer Request</a>
+          <a href="testimony.html">Testimony</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+
+      <a href="login.html" class="login-link">Login</a>
+
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Welcome to Charity Tabernacle</h2>
+    <p>A place where lives are raised, strengthened, and transformed through the Word of God.</p>
+    <a href="login.html" class="button button-outline">Member Login</a>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Welcome</h2>
+    <p>Charity Tabernacle Agbor welcomes you to fellowship with us in the revealed Word of God.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Service Times</h3>
+      <p><strong>Sunday Service:</strong> 9:00AM</p>
+      <p><strong>Wednesday Service:</strong> 4:30PM</p>
+    </div>
+
+    <div class="card">
+      <h3>Donations & Offering</h3>
+      <p>Support the work of the ministry through your giving and offerings.</p>
+      <a href="donations.html" class="button">Give Now</a>
+    </div>
+
+    <div class="card">
+      <h3>Sunday School Scriptures</h3>
+      <p>Access Sunday School scriptures and study materials for the assembly.</p>
+      <a href="sunday-school.html" class="button">View Scriptures</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Announcements</h2>
+    <p>Important public updates from the assembly.</p>
+  </div>
+
+  <div class="grid">
     <div class="card">
       <h3>Maricopa Valley Convention</h3>
       <p>August 13–16, 2026</p>
@@ -235,79 +368,19 @@ footer{
       <h3>Isiokpo Youth Convention</h3>
       <p>September 3–7, 2026</p>
     </div>
-  </div>
-</section>
 
-<section>
-  <h2>Contact</h2>
-  <div class="card">
-    <p>Bro Samson: +2348037256852</p>
-    <p>Bro Ikechukwu: +2347066217152</p>
-    <p>Agbor, Delta State</p>
+    <div class="card">
+      <h3>Service Reminder</h3>
+      <p>Join us every Sunday by 9:00AM and Wednesday by 4:30PM.</p>
+    </div>
   </div>
 </section>
 
 <footer>
-  © 2026 Charity Tabernacle Agbor
+  <p>© 2026 Charity Tabernacle Agbor. All Rights Reserved.</p>
 </footer>
 
-<a href="https://wa.me/2348033595016?text=Hello%20Pastor"
-class="whatsapp">Prayer</a>
-
-<!-- Plyr -->
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
-<script>
-const livePlayer = new Plyr('#livePlayer');
-const lastServicePlayer = new Plyr('#lastServicePlayer');
-
-const API_KEY = 'AIzaSyC8bOAIqBfvIxVNFZwuw7MH8-vfTk4CuFc';
-const PLAYLIST_ID = 'UUwLLSjfGQBN0ZAA1wIK0fCQ';
-
-// LOAD LIVE VIDEO (channel live)
-livePlayer.source = {
-  type: 'video',
-  sources: [{
-    src: 'UCwLLSjfGQBN0ZAA1wIK0fCQ',
-    provider: 'youtube',
-  }]
-};
-
-// LOAD LAST VIDEO
-fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${PLAYLIST_ID}&key=${API_KEY}`)
-.then(res => res.json())
-.then(data => {
-  const id = data.items[0].snippet.resourceId.videoId;
-
-  lastServicePlayer.source = {
-    type: 'video',
-    sources: [{
-      src: id,
-      provider: 'youtube'
-    }]
-  };
-});
-
-// LOAD JSON TEXT
-fetch('churchData.json')
-.then(res => res.json())
-.then(data => {
-
-  if(data.announcements){
-    document.getElementById("announcements").innerHTML =
-    data.announcements.replace(/\n/g,"<br>");
-    
-    document.getElementById("tickerText").innerText =
-    data.announcements.replace(/\n/g," | ");
-  }
-
-  if(data.dailyQuote){
-    document.getElementById("dailyQuote").innerHTML =
-    data.dailyQuote;
-  }
-
-});
-</script>
+<a href="https://wa.me/2348033595016?text=Hello%20Pastor" class="whatsapp">Prayer</a>
 
 </body>
 </html>

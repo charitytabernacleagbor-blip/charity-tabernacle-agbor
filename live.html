@@ -1,71 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Watch Live - Charity Tabernacle Agbor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Plyr CSS -->
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<link rel="icon" type="image/png" href="Logo.png">
 
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;text-align:center}
-header{background:#111;color:white;padding:20px;text-align:center;border-bottom:3px solid #f5a623}
-header img{height:80px;margin-bottom:10px}
-header a{color:#f5a623;text-decoration:none;margin:0 10px;font-weight:bold}
-header a:hover{text-decoration:underline}
-section{padding:30px 20px;background:#f9f9f9;margin-bottom:20px;border-radius:8px;text-align:center}
-section h2{text-align:center;color:#111;margin-bottom:20px}
-.video{max-width:1920px;width:100%;margin:20px auto}
-footer{background:#111;color:white;padding:20px;text-align:center}
-#serviceTimes{margin-top:15px;font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background:#f5f1e8;
+  color:#222;
+  line-height:1.6;
+}
+
+header{
+  background:#1b1208;
+  color:white;
+  padding:18px 20px;
+  text-align:center;
+}
+
+header img{height:70px;}
+
+header h1{
+  color:#f5c46b;
+  margin-top:8px;
+}
+
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:45px 20px;
+}
+
+.button{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:11px 18px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+  margin:5px;
+}
+
+.button:hover{background:#8b6508;}
+
+.player-box{
+  background:#1b1208;
+  color:white;
+  border-radius:14px;
+  min-height:420px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
+  margin-top:35px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  border-top:4px solid #b8860b;
+}
+
+.card h3{
+  color:#1b1208;
+  margin-bottom:10px;
+}
+
+.status{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+footer{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:22px;
+  margin-top:40px;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Header with Logo -->
+<script>
+if(localStorage.getItem("memberLoggedIn") !== "true"){
+  window.location.href = "login.html";
+}
+</script>
+
 <header>
-  <a href="index.html"><img src="Logo.png" alt="Charity Tabernacle Logo"></a>
-  <h1><a href="index.html" style="color:white;text-decoration:none;">Charity Tabernacle Agbor</a></h1>
-  <p>Raising Lives Through The Word of God</p>
-  <p>Pastor Eugene Uzoma Ibeabuchi</p>
-  <p>
-    <a href="index.html">Home</a> |
-    <a href="live.html">Watch Live</a> |
-    <a href="sermons.html">Archive</a>
-  </p>
+  <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+  <h1>Watch Live</h1>
+  <p>Protected livestream access for Charity Tabernacle Agbor</p>
 </header>
 
-<!-- Banner -->
 <section>
-  <img src="Banner.jpg" style="width:100%;max-height:400px;object-fit:cover;">
-</section>
 
-<!-- Service Times -->
-<section>
-  <h2>Service Times</h2>
-  <p id="serviceTimes">Sunday Worship Service – 9:00 AM | Wednesday Worship Service – 6:00 PM</p>
-</section>
-
-<!-- Live Stream Player -->
-<section>
-  <h2>Watch Live Service</h2>
-  <div class="video">
-    <video id="livePlayer" playsinline controls data-poster="Banner.jpg">
-      <source src="https://www.youtube.com/watch?v=UCwLLSjfGQBN0ZAA1wIK0fCQ" type="video/youtube">
-    </video>
+  <div style="text-align:center;margin-bottom:25px;">
+    <a href="dashboard.html" class="button">← Back to Homepage</a>
   </div>
+
+  <div class="player-box">
+    <div>
+      <span class="status">Stream Player Ready</span>
+      <h2>Livestream Player Coming Soon</h2>
+      <p>
+        This area will be connected to the Godstone streaming/player server
+        when the server details are available.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Service Schedule</h3>
+      <p><strong>Sunday Service:</strong> 9:00AM</p>
+      <p><strong>Wednesday Service:</strong> 4:30PM</p>
+    </div>
+
+    <div class="card">
+      <h3>Recent Broadcasts</h3>
+      <p>Recent service recordings will appear here after storage server connection.</p>
+    </div>
+
+    <div class="card">
+      <h3>Need Prayer?</h3>
+      <p>Send your prayer request while watching the service.</p>
+      <a href="prayer-request.html" class="button">Prayer Request</a>
+    </div>
+  </div>
+
 </section>
 
-<!-- Footer -->
 <footer>
-  <p>© 2026 Charity Tabernacle Agbor</p>
+  <p>© 2026 Charity Tabernacle Agbor. All Rights Reserved.</p>
 </footer>
-
-<!-- Plyr JS -->
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<script>
-const livePlayer = new Plyr('#livePlayer');
-</script>
 
 </body>
 </html>

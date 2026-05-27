@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Elohim Series</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="Logo.png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background:#f5f1e8;
+  color:#222;
+  line-height:1.6;
+}
+
+header{
+  background:#1b1208;
+  color:white;
+  padding:18px 20px;
+  text-align:center;
+}
+
+header img{
+  height:70px;
+}
+
+header h1{
+  color:#f5c46b;
+  margin-top:8px;
+}
+
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:45px 20px;
+}
+
+.top-actions{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.button{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:11px 18px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+  margin:5px;
+}
+
+.button:hover{
+  background:#8b6508;
+}
+
+.search-box{
+  max-width:520px;
+  margin:0 auto 30px;
+}
+
+.search-box input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  border-top:4px solid #b8860b;
+}
+
+.card h3{
+  color:#1b1208;
+  margin-bottom:10px;
+}
+
+.badge{
+  display:inline-block;
+  background:#1b1208;
+  color:#f5c46b;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+footer{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:22px;
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+if(localStorage.getItem("memberLoggedIn") !== "true"){
+  window.location.href = "login.html";
+}
+</script>
+
+<header>
+  <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+  <h1>Elohim Series</h1>
+  <p>Elohim teaching and message series archive</p>
+</header>
+
+<section>
+
+  <div class="top-actions">
+    <a href="bro-coleman-messages.html" class="button">← Back to Bro Coleman Archives</a>
+    <a href="dashboard.html" class="button">Homepage</a>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search Elohim Series..." onkeyup="searchSeries()">
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="badge">Elohim Series</span>
+      <h3>Series Title Coming Soon</h3>
+      <p><strong>Part:</strong> To be added</p>
+      <p><strong>Type:</strong> Video / Audio / Transcript</p>
+      <a href="#" class="button">Open</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">Teaching</span>
+      <h3>Elohim Teaching Coming Soon</h3>
+      <p><strong>Part:</strong> To be added</p>
+      <p><strong>Type:</strong> Video / Audio / Transcript</p>
+      <a href="#" class="button">Open</a>
+    </div>
+
+    <div class="card">
+      <span class="badge">Archive</span>
+      <h3>Series Archive Coming Soon</h3>
+      <p><strong>Part:</strong> To be added</p>
+      <p><strong>Type:</strong> Video / Audio / Transcript</p>
+      <a href="#" class="button">Open</a>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 Charity Tabernacle Agbor. All Rights Reserved.</p>
+</footer>
+
+<script>
+function searchSeries(){
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(input) ? "block" : "none";
+  });
+}
+</script>
+
+</body>
+</html>

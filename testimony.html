@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Share Testimony - Charity Tabernacle Agbor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="Logo.png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background:#f5f1e8;
+  color:#222;
+}
+
+header{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+
+header img{height:70px;}
+
+header h1{
+  color:#f5c46b;
+  margin-top:10px;
+}
+
+section{
+  max-width:750px;
+  margin:auto;
+  padding:45px 20px;
+}
+
+.form-box{
+  background:white;
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  border-top:5px solid #b8860b;
+}
+
+label{
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+  color:#1b1208;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:13px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:7px;
+  font-size:15px;
+}
+
+textarea{
+  min-height:160px;
+  resize:vertical;
+}
+
+.button{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:12px 18px;
+  border:none;
+  border-radius:7px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:18px;
+  cursor:pointer;
+}
+
+.button:hover{background:#8b6508;}
+
+.success{
+  display:none;
+  margin-top:18px;
+  color:green;
+  font-weight:bold;
+}
+
+footer{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:22px;
+  margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+  <h1>Share Your Testimony</h1>
+  <p>Tell us what the Lord has done in your life</p>
+</header>
+
+<section>
+  <div class="form-box">
+    <form onsubmit="submitTestimony(event)">
+
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
+
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number">
+
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email address">
+
+      <label>Testimony Category</label>
+      <select id="category" required>
+        <option value="">Select category</option>
+        <option>Healing</option>
+        <option>Deliverance</option>
+        <option>Provision</option>
+        <option>Family</option>
+        <option>Salvation</option>
+        <option>Spiritual Experience</option>
+        <option>Other</option>
+      </select>
+
+      <label>Your Testimony</label>
+      <textarea id="message" placeholder="Write your testimony here..." required></textarea>
+
+      <button type="submit" class="button">Submit Testimony</button>
+      <a href="index.html" class="button">Back Home</a>
+
+      <div class="success" id="successMessage">
+        Your testimony has been prepared for submission.
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Charity Tabernacle Agbor. All Rights Reserved.</p>
+</footer>
+
+<script>
+function submitTestimony(event){
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const email = document.getElementById("email").value;
+  const category = document.getElementById("category").value;
+  const message = document.getElementById("message").value;
+
+  const whatsappMessage =
+    "Testimony Submission%0A%0A" +
+    "Name: " + encodeURIComponent(name) + "%0A" +
+    "Phone: " + encodeURIComponent(phone) + "%0A" +
+    "Email: " + encodeURIComponent(email) + "%0A" +
+    "Category: " + encodeURIComponent(category) + "%0A%0A" +
+    "Testimony:%0A" + encodeURIComponent(message);
+
+  window.open("https://wa.me/2348033595016?text=" + whatsappMessage, "_blank");
+
+  document.getElementById("successMessage").style.display = "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Homepage - Charity Tabernacle Agbor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="Logo.png">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background:#f5f1e8;
+  color:#222;
+  line-height:1.6;
+}
+
+header{
+  background:#1b1208;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+
+.header-inner{
+  max-width:1250px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{height:65px;}
+
+.brand h1{
+  font-size:23px;
+  color:#f5c46b;
+}
+
+.brand p{
+  font-size:14px;
+  color:#eee;
+}
+
+.main-nav{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.main-nav a{
+  color:white;
+  text-decoration:none;
+  padding:10px 12px;
+  font-weight:600;
+  font-size:14px;
+  display:block;
+  white-space:nowrap;
+}
+
+.main-nav a:hover{color:#f5c46b;}
+
+.dropdown{position:relative;}
+
+.dropdown-menu{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#2a1b0d;
+  min-width:270px;
+  border-top:3px solid #b8860b;
+  box-shadow:0 8px 20px rgba(0,0,0,0.35);
+}
+
+.dropdown:hover > .dropdown-menu{display:block;}
+
+.dropdown-menu a{
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.sub-dropdown{position:relative;}
+
+.sub-menu{
+  display:none;
+  position:absolute;
+  left:100%;
+  top:0;
+  background:#33200f;
+  min-width:220px;
+  border-top:3px solid #b8860b;
+  box-shadow:0 8px 20px rgba(0,0,0,0.35);
+}
+
+.sub-dropdown:hover > .sub-menu{display:block;}
+
+.logout-link{
+  background:#b8860b;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.hero{
+  min-height:82vh;
+  background:
+    linear-gradient(rgba(27,18,8,0.55), rgba(27,18,8,0.55)),
+    url("Banner.jpg") center center / cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  padding:40px 20px;
+}
+
+.hero-content{
+  max-width:900px;
+}
+
+.hero h2{
+  font-size:44px;
+  color:#f5c46b;
+  margin-bottom:15px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.6);
+}
+
+.hero p{
+  font-size:21px;
+  text-shadow:0 3px 10px rgba(0,0,0,0.6);
+}
+
+.type-text span{
+  opacity:0;
+  animation:letterAppear 0.04s forwards;
+}
+
+@keyframes letterAppear{
+  to{opacity:1;}
+}
+
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 20px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.section-title h2{
+  font-size:30px;
+  color:#1b1208;
+}
+
+.section-title p{
+  color:#666;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:22px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.08);
+  border-top:4px solid #b8860b;
+  transition:0.3s;
+}
+
+.card:hover{transform:translateY(-4px);}
+
+.card h3{
+  color:#1b1208;
+  margin-bottom:10px;
+}
+
+.button{
+  display:inline-block;
+  background:#b8860b;
+  color:white;
+  padding:10px 16px;
+  border-radius:6px;
+  text-decoration:none;
+  margin-top:12px;
+  font-weight:bold;
+}
+
+.button:hover{background:#8b6508;}
+
+.notice-card{background:#fffaf0;}
+
+.video-box{
+  background:#1b1208;
+  color:white;
+  height:170px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:15px;
+  text-align:center;
+  padding:15px;
+}
+
+footer{
+  background:#1b1208;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+
+@media(max-width:900px){
+  .header-inner{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .main-nav{
+    justify-content:center;
+  }
+
+  .dropdown-menu,
+  .sub-menu{
+    position:static;
+    width:100%;
+    box-shadow:none;
+  }
+
+  .dropdown:hover > .dropdown-menu,
+  .sub-dropdown:hover > .sub-menu{
+    display:block;
+  }
+
+  .hero{min-height:65vh;}
+  .hero h2{font-size:30px;}
+  .hero p{font-size:17px;}
+}
+</style>
+</head>
+
+<body>
+
+<script>
+if(localStorage.getItem("memberLoggedIn") !== "true"){
+  window.location.href = "login.html";
+}
+</script>
+
+<header>
+  <div class="header-inner">
+
+    <div class="brand">
+      <img src="Logo.png" alt="Charity Tabernacle Agbor Logo">
+      <div>
+        <h1>Charity Tabernacle Agbor</h1>
+        <p>Raising Lives Through The Word</p>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+
+      <div class="dropdown">
+        <a href="dashboard.html">Home ▾</a>
+        <div class="dropdown-menu">
+          <a href="quotes.html">Daily Quotes</a>
+          <a href="about-ministry.html">About The Ministry</a>
+          <a href="about-pastor.html">About The Pastor</a>
+          <a href="donations.html">Donations & Offering</a>
+          <a href="sunday-school.html">Sunday School Scriptures</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Archives ▾</a>
+        <div class="dropdown-menu">
+
+          <div class="sub-dropdown">
+            <a href="#">Charity Tabernacle Archives ▸</a>
+            <div class="sub-menu">
+              <a href="charity-archives.html">2013–2026</a>
+            </div>
+          </div>
+
+          <div class="sub-dropdown">
+            <a href="#">Fivefold Ministry Archives ▸</a>
+            <div class="sub-menu">
+              <a href="fivefold-ministry-archives.html">2012–2026</a>
+            </div>
+          </div>
+
+          <div class="sub-dropdown">
+            <a href="#">Bro Coleman Archives ▸</a>
+            <div class="sub-menu">
+              <a href="bro-coleman-messages.html">Messages</a>
+              <a href="elohim-series.html">Elohim Series</a>
+              <a href="search-library.html">Search The Library</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Conventions ▾</a>
+        <div class="dropdown-menu">
+
+          <div class="sub-dropdown">
+            <a href="#">Africa ▸</a>
+            <div class="sub-menu">
+              <a href="africa-conventions.html">All Africa</a>
+              <a href="nigeria-conventions.html">Nigeria</a>
+              <a href="ghana-conventions.html">Ghana</a>
+              <a href="kenya-conventions.html">Kenya</a>
+              <a href="south-africa-conventions.html">South Africa</a>
+            </div>
+          </div>
+
+          <div class="sub-dropdown">
+            <a href="#">North America ▸</a>
+            <div class="sub-menu">
+              <a href="north-america-conventions.html">All North America</a>
+              <a href="usa-conventions.html">USA</a>
+              <a href="canada-conventions.html">Canada</a>
+            </div>
+          </div>
+
+          <div class="sub-dropdown">
+            <a href="#">Europe ▸</a>
+            <div class="sub-menu">
+              <a href="europe-conventions.html">All Europe</a>
+              <a href="uk-conventions.html">United Kingdom</a>
+              <a href="germany-conventions.html">Germany</a>
+              <a href="france-conventions.html">France</a>
+            </div>
+          </div>
+
+          <div class="sub-dropdown">
+            <a href="#">Asia ▸</a>
+            <div class="sub-menu">
+              <a href="asia-conventions.html">All Asia</a>
+              <a href="india-conventions.html">India</a>
+              <a href="philippines-conventions.html">Philippines</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Help ▾</a>
+        <div class="dropdown-menu">
+          <a href="prayer-request.html">Prayer Request</a>
+          <a href="testimony.html">Testimony</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+
+      <a href="live.html">Watch Live</a>
+      <a onclick="logout()" class="logout-link">Logout</a>
+
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2 class="type-text" id="heroTitle">Welcome to Charity Tabernacle</h2>
+    <p class="type-text" id="heroSubtitle">A place where lives are raised, strengthened, and transformed through the Word of God.</p>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Quick Links</h2>
+    <p>Access important ministry sections quickly.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Watch Live</h3>
+      <p>Join live services when broadcast is available.</p>
+      <a href="live.html" class="button">Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Daily Quotes</h3>
+      <p>Read spiritual quotes and encouragements.</p>
+      <a href="quotes.html" class="button">Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Search The Library</h3>
+      <p>Search ministry messages and archive materials.</p>
+      <a href="search-library.html" class="button">Search</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Announcements</h2>
+    <p>Latest updates and reminders from the assembly.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card notice-card">
+      <h3>Service Times</h3>
+      <p><strong>Sunday Service:</strong> 9:00AM</p>
+      <p><strong>Wednesday Service:</strong> 4:30PM</p>
+    </div>
+
+    <div class="card notice-card">
+      <h3>Maricopa Valley Convention</h3>
+      <p>August 13–16, 2026</p>
+    </div>
+
+    <div class="card notice-card">
+      <h3>Isiokpo Youth Convention</h3>
+      <p>September 3–7, 2026</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Featured Videos</h2>
+    <p>Featured services and messages will appear here.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="video-box">Featured Video Placeholder</div>
+      <h3>Latest Service</h3>
+      <p>This will connect to the storage server when ready.</p>
+      <a href="#" class="button">Watch</a>
+    </div>
+
+    <div class="card">
+      <div class="video-box">Featured Video Placeholder</div>
+      <h3>Featured Message</h3>
+      <p>A selected message can be displayed here.</p>
+      <a href="#" class="button">Watch</a>
+    </div>
+
+    <div class="card">
+      <div class="video-box">Featured Video Placeholder</div>
+      <h3>Convention Highlight</h3>
+      <p>Convention recordings can be featured here.</p>
+      <a href="#" class="button">Watch</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Archives</h2>
+    <p>Access message archives and ministry resources.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Charity Tabernacle Archives</h3>
+      <p>Messages and services from Charity Tabernacle Agbor.</p>
+      <a href="charity-archives.html" class="button">2013–2026</a>
+    </div>
+
+    <div class="card">
+      <h3>Fivefold Ministry Archives</h3>
+      <p>Fivefold Ministry messages and services.</p>
+      <a href="fivefold-ministry-archives.html" class="button">2012–2026</a>
+    </div>
+
+    <div class="card">
+      <h3>Bro Coleman Archives</h3>
+      <p>Messages, Elohim Series, and Search The Library resources.</p>
+      <a href="bro-coleman-messages.html" class="button">Open</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Charity Tabernacle Agbor. All Rights Reserved.</p>
+</footer>
+
+<script>
+function logout(){
+  localStorage.removeItem("memberLoggedIn");
+  window.location.href = "index.html";
+}
+
+function typeLetters(elementId){
+  const element = document.getElementById(elementId);
+  const text = element.textContent;
+  element.textContent = "";
+
+  text.split("").forEach((letter, index) => {
+    const span = document.createElement("span");
+    span.textContent = letter;
+    span.style.animationDelay = `${index * 0.04}s`;
+    element.appendChild(span);
+  });
+}
+
+typeLetters("heroTitle");
+typeLetters("heroSubtitle");
+</script>
+
+</body>
+</html>
